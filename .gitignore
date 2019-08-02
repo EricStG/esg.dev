@@ -1,2 +1,4 @@
-
 src/hugo/public/
+.terraform
+*.backup
+*.tfstate
