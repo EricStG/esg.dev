@@ -5,7 +5,7 @@ theme = "ananke"
 
 DefaultContentLanguage = "en"
 SectionPagesMenu = "main"
-googleAnalytics = ""
+googleAnalytics = "UA-145113644-1"
 enableRobotsTXT = true
 show_reading_time = false
 
@@ -15,7 +15,6 @@ show_reading_time = false
   filename = "sitemap.xml"
   
 [params]
-  facebook = ""
   twitter = "https://twitter.com/Eric_STG"
   github = "https://github.com/EricStG"
   linkedin = "https://www.linkedin.com/in/eric-st-georges/"
