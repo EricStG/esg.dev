@@ -7,5 +7,3 @@ git subtree add --prefix src/hugo/themes/ananke ananke master --squash
 
 git fetch ananke master
 git subtree pull --prefix src/hugo/themes/ananke ananke master --squash
-
-
