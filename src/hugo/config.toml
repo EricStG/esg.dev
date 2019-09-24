@@ -21,3 +21,6 @@ show_reading_time = false
   # choose a background color from any on this page: http://tachyons.io/docs/themes/skins/ and preface it with "bg-"
   background_color_class = "bg-black"
   recent_posts_number = 3
+
+[taxonomies]
+  tag = "tags"
