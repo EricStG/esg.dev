@@ -1,4 +1,0 @@
-* text=auto
-*.toml text eol=lf
-*.md text eol=lf
-*.svg -text
