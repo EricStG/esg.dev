@@ -9,7 +9,7 @@ tags:
 
 As I was in the process of moving this blog from AWS to Azure, I found myself in an interesting position.
 
-Azure CDN can provision a certificate for HTTPS on its own, unless you are using the root domain (ex: esg.dev), in which case you need to provide your own.
+Azure CDN can provision a certificate for HTTPS on its own, unless you are using the root domain (ex: `esg.dev`), in which case you need to provide your own.
 
 I figured the cheapest way would be to use [Let's Encrypt](https://letsencrypt.org/), since it's free. And Azure already supports it.
 
@@ -51,7 +51,7 @@ Now we can use certbot to generate a new certificate in [manual mode](https://ce
 
 Note: It's possible to run certbot without sudo, see https://certbot.eff.org/faq/#does-certbot-require-root-administrator-privileges for more information.
 
-While Let's Encrypt supports wildcard certificates (ex: \*.esg.dev), I only need www.esg.dev and esg.dev, so I'll be specifying those via the `-d` (domain) switch.
+While Let's Encrypt supports wildcard certificates (ex: `*.esg.dev`), I only need `www.esg.dev` and `esg.dev`, so I'll be specifying those via the `-d` (domain) switch.
 
 We'll also be using the DNS validation method, which involves addings TXT records to your DNS zone, specifically one for each domain within the certicate.
 
