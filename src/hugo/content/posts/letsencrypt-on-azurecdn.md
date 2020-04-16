@@ -1,7 +1,6 @@
 ---
 title: "Using Let's Encrypt with Azure CDN"
 date: 2020-04-16T14:17:03-04:00
-draft: true
 tags:
 - Azure 
 - Let's Encrypt
