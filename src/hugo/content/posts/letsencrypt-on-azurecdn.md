@@ -53,7 +53,7 @@ Note: It's possible to run certbot without sudo, see https://certbot.eff.org/faq
 
 While Let's Encrypt supports wildcard certificates (ex: `*.esg.dev`), I only need `www.esg.dev` and `esg.dev`, so I'll be specifying those via the `-d` (domain) switch.
 
-We'll also be using the DNS validation method, which involves addings TXT records to your DNS zone, specifically one for each domain within the certicate.
+We'll also be using the DNS validation method, which involves adding TXT records to your DNS zone, specifically one for each domain within the certificate.
 
 Now we run the following to launch the certbot wizard.
 
