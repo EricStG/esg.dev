@@ -25,7 +25,7 @@ These are the steps I took to make it happen.
 
 First, let's setup [certbot](https://certbot.eff.org/).
 
-You will need access to a Linux machine as there are no version of certbot available for Windows yet. In my case, I used Ubuntu on top for WSL, and I based the commands off the [Ubuntu documentation page](https://certbot.eff.org/lets-encrypt/ubuntubionic-apache.html) for certbot.
+You will need access to a Linux machine as there is no version of certbot available for Windows yet. In my case, I used Ubuntu on top for WSL, and I based the commands off the [Ubuntu documentation page](https://certbot.eff.org/lets-encrypt/ubuntubionic-apache.html) for certbot.
 
 ## Install certbot
 
@@ -83,7 +83,7 @@ you now can upload the generated pfx file to an Azure key vault, which will allo
 
 Let's Encrypt certificates have an expiry of 90 days.
 
-To renew the certificate, it's important to remember that certbot's`renew` command is meant for non-interactive usage, and won't work out of the box with the manual plugin.
+To renew the certificate, it's important to remember that certbot's `renew` command is meant for non-interactive usage, and won't work out of the box with the manual plugin.
 
 But all we need to do is re-run the *same exact command* as we did the first time:
 
