@@ -4,7 +4,7 @@ title = "ESG's"
 theme = "ananke"
 
 DefaultContentLanguage = "en"
-SectionPagesMenu = "main"
+#SectionPagesMenu = "main"
 googleAnalytics = "UA-145113644-1"
 enableRobotsTXT = true
 show_reading_time = false
@@ -24,3 +24,25 @@ show_reading_time = false
 
 [taxonomies]
   tag = "tags"
+
+[menu]
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    pre = "<i class='fa fa-heart'></i>"
+    url = "/about/"
+    weight = 1
+	
+  [[menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    pre = "<i class='fa fa-heart'></i>"
+    url = "/posts/"
+    weight = 10
+	
+  [[menu.main]]
+    identifier = "tags"
+    name = "Tags"
+    pre = "<i class='fa fa-heart'></i>"
+    url = "/tags/"
+    weight = 20
