@@ -2,19 +2,21 @@
 title: "Introduction to Action Constraints in ASP.NET Core"
 date: 2019-12-02T18:45:08-05:00
 tags:
-- ASP.Net Core
+- ASP.NET Core
+- .NET
+
 ---
 Ever had to integrate a 3rd party webhook into your application, only to realize that they won't let you configure a different address for each type of events?
 
 A few years ago, I had to do just that for Github webhooks. Thankfully, they provide a HTTP header that describe the type of event being sent.
 
-At the time, I used a middleware to modify the route, but there are cleaner solutions out there. In this case, I could've used a feature in ASP.Net Core called "Action Constraints", which allow you to impose constraint on otherwise identical routes.
+At the time, I used a middleware to modify the route, but there are cleaner solutions out there. In this case, I could've used a feature in ASP.NET Core called "Action Constraints", which allow you to impose constraint on otherwise identical routes.
 
 Note: This is a follow-up on a question I had a few years ago on [StackOverflow](https://stackoverflow.com/questions/39302121/header-based-routing-in-asp-net-core), and I decided to dig a little deeper.
 
 ## Action Contraint Attribute
 
-ASP.Net Core has an attribute called [`IActionConstraint`](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.actionconstraints.iactionconstraint?f1url=https%3A%2F%2Fmsdn.microsoft.com%2Fquery%2Fdev16.query%3FappId%3DDev16IDEF1%26l%3DEN-US%26k%3Dk(Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint);k(DevLang-csharp)%26rd%3Dtrue&view=aspnetcore-3.0) which has only 2 members:
+ASP.NET Core has an attribute called [`IActionConstraint`](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.actionconstraints.iactionconstraint?f1url=https%3A%2F%2Fmsdn.microsoft.com%2Fquery%2Fdev16.query%3FappId%3DDev16IDEF1%26l%3DEN-US%26k%3Dk(Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint);k(DevLang-csharp)%26rd%3Dtrue&view=aspnetcore-3.0) which has only 2 members:
 - `Order`, which will determine what order your constraint will be evaluated on (lowest number first)
 - `Accept(ActionConstraintContext)`, which needs to return a boolean that will tell the framework whether to use this route
 
