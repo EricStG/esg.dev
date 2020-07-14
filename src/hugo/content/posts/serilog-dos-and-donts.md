@@ -226,7 +226,7 @@ Simply include the exception as the first argument
 
 ```cs
 var exception = new Exception("Top exception", new Exception("Inner exception"));
-jsonLogger.Information("Exception! {exception}", exception);
+jsonLogger.Information(exception, "Exception");
 ```
 
 And now all logged exceptions will be within the `@x` field.
