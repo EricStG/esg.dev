@@ -1,6 +1,6 @@
 ---
 title: "Introduction to Action Constraints in ASP.NET Core"
-date: 2020-08-24T20:45:08-05:00
+date: 2019-12-02T18:45:08-05:00
 summary: Adding constraints to a route in ASP.NET Core using by implementing IActionConstraint on an attribute
 tags:
 - ASP.NET Core

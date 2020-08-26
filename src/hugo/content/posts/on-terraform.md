@@ -1,6 +1,6 @@
 ---
 title: "State management with Terraform"
-date: 2020-08-24T20:45:08-05:00
+date: 2019-09-21T19:57:59-04:00
 summary: An horror story about state management in Terraform
 tags:
 - Terraform

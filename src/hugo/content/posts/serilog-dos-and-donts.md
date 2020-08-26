@@ -1,6 +1,6 @@
 ---
 title: "Serilog Do's and Don'ts"
-date: 2020-08-24T20:45:08-05:00
+date: 2020-07-12T18:08:20-04:00
 summary: Some tips on how to effectively use structure logging using Serilog
 tags:
 - Serilog
