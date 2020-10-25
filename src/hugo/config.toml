@@ -1,13 +1,16 @@
 baseURL = "https://esg.dev/"
 languageCode = "en-us"
 title = "ESG's"
-theme = "ananke"
 
 DefaultContentLanguage = "en"
 #SectionPagesMenu = "main"
 googleAnalytics = "UA-145113644-1"
 enableRobotsTXT = true
 show_reading_time = false
+
+[module]
+  [[module.imports]]
+    path = "github.com/theNewDynamic/gohugo-theme-ananke"
 
 [sitemap]
   changefreq = "monthly"
