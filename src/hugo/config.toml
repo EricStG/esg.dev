@@ -49,3 +49,9 @@ show_reading_time = false
     pre = "<i class='fa fa-heart'></i>"
     url = "/tags/"
     weight = 20
+
+[privacy]
+  [privacy.googleAnalytics]
+    anonymizeIP = true
+    respectDoNotTrack = true
+    useSessionStorage = true
