@@ -34,7 +34,7 @@ Let's take a simple scenario:
 
 What's the difference between the 3? It seems to often be limited to years of experience, but that's too simplistic in my opinion.
 
-As someone's career growth, I expect that their contributions will affect a wider group, such as being involved in process, architecture, and anything else that will impact more than your own world.
+As one's career grows, I expect that their contributions will affect a wider group, such as being involved in process, architecture, and anything else that will impact more than your own world.
 
 On the other side, if you've been working for 10+ years but your contributions are limited to only writing code to the tasks assigned to you, you're not a "senior", you're a junior with a long resume.
 
