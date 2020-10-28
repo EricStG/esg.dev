@@ -13,7 +13,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
     - name: Publish Site
-      uses: EricStG/hugo-gh-pages@hugo-module
+      uses: chabad360/hugo-gh-pages@master
       with:
         githubToken: ${{ secrets.PERSONAL_TOKEN }}
         cname: esg.dev
