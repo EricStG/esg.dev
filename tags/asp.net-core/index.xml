@@ -1,1 +1,61 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ASP.NET Core on ESG's</title><link>https://esg.dev/tags/asp.net-core/</link><description>Recent content in ASP.NET Core on ESG's</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 02 Dec 2019 18:45:08 -0500</lastBuildDate><atom:link href="https://esg.dev/tags/asp.net-core/index.xml" rel="self" type="application/rss+xml"/><item><title>Introduction to Action Constraints in ASP.NET Core</title><link>https://esg.dev/posts/introduction-to-action-constraints/</link><pubDate>Mon, 02 Dec 2019 18:45:08 -0500</pubDate><guid>https://esg.dev/posts/introduction-to-action-constraints/</guid><description>Adding constraints to a route in ASP.NET Core using by implementing IActionConstraint on an attribute</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ASP.NET Core on ESG's</title><link>https://esg.dev/tags/asp.net-core/</link><description>Recent content in ASP.NET Core on ESG's</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 02 Dec 2019 18:45:08 -0500</lastBuildDate><atom:link href="https://esg.dev/tags/asp.net-core/index.xml" rel="self" type="application/rss+xml"/><item><title>Introduction to Action Constraints in ASP.NET Core</title><link>https://esg.dev/posts/introduction-to-action-constraints/</link><pubDate>Mon, 02 Dec 2019 18:45:08 -0500</pubDate><guid>https://esg.dev/posts/introduction-to-action-constraints/</guid><description>&lt;p>Ever had to integrate a 3rd party webhook into your application, only to realize that they won&amp;rsquo;t let you configure a different address for each type of events?&lt;/p>
+&lt;p>A few years ago, I had to do just that for Github webhooks. Thankfully, they provide a HTTP header that describe the type of event being sent.&lt;/p>
+&lt;p>At the time, I used a middleware to modify the route, but there are cleaner solutions out there. In this case, I could&amp;rsquo;ve used a feature in ASP.NET Core called &amp;ldquo;Action Constraints&amp;rdquo;, which allow you to impose constraint on otherwise identical routes.&lt;/p>
+&lt;p>Note: This is a follow-up on a question I had a few years ago on &lt;a href="https://stackoverflow.com/questions/39302121/header-based-routing-in-asp-net-core">StackOverflow&lt;/a>, and I decided to dig a little deeper.&lt;/p>
+&lt;h2 id="action-contraint-attribute">Action Contraint Attribute&lt;/h2>
+&lt;p>ASP.NET Core has an interface called &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.actionconstraints.iactionconstraint?f1url=https%3A%2F%2Fmsdn.microsoft.com%2Fquery%2Fdev16.query%3FappId%3DDev16IDEF1%26l%3DEN-US%26k%3Dk(Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint);k(DevLang-csharp)%26rd%3Dtrue&amp;amp;view=aspnetcore-3.0">&lt;code>IActionConstraint&lt;/code>&lt;/a> that can be implemented by an &lt;code>Attribute&lt;/code> class, which has only 2 members:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Order&lt;/code>, which will determine what order your constraint will be evaluated on (lowest number first)&lt;/li>
+&lt;li>&lt;code>Accept(ActionConstraintContext)&lt;/code>, which needs to return a boolean that will tell the framework whether to use this route&lt;/li>
+&lt;/ul>
+&lt;p>Let&amp;rsquo;s see what an implementation can look like:&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">HeaderConstraintAttribute&lt;/span> : Attribute, IActionConstraint
+{
+&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span> Order =&amp;gt; &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> Header { &lt;span style="color:#66d9ef">get&lt;/span>; }
+&lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> Value { &lt;span style="color:#66d9ef">get&lt;/span>; }
+&lt;span style="color:#66d9ef">public&lt;/span> HeaderConstraintAttribute(&lt;span style="color:#66d9ef">string&lt;/span> header, &lt;span style="color:#66d9ef">string&lt;/span> &lt;span style="color:#66d9ef">value&lt;/span>)
+{
+Header = header;
+Value = &lt;span style="color:#66d9ef">value&lt;/span>;
+}
+&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">bool&lt;/span> Accept(ActionConstraintContext context)
+{
+&lt;span style="color:#66d9ef">if&lt;/span> (context.RouteContext.HttpContext.Request.Headers.TryGetValue(Header, &lt;span style="color:#66d9ef">out&lt;/span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#66d9ef">value&lt;/span>) &amp;amp;&amp;amp; &lt;span style="color:#66d9ef">value&lt;/span>.Any())
+{
+&lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">value&lt;/span>[&lt;span style="color:#ae81ff">0&lt;/span>] == Value;
+}
+&lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">false&lt;/span>;
+}
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Simple enough, right? Look for a matching &lt;code>Header&lt;/code> in the &lt;code>HttpContext&lt;/code>, and if present, match it with &lt;code>Value&lt;/code>.&lt;/p>
+&lt;p>Now, let&amp;rsquo;s update our controller.&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#a6e22e">[Route(&amp;#34;api/[controller]&lt;/span>&lt;span style="color:#e6db74">&amp;#34;)]
+&lt;/span>&lt;span style="color:#e6db74">&lt;/span>&lt;span style="color:#a6e22e">[ApiController]&lt;/span>
+&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">ActionController&lt;/span> : ControllerBase
+{
+&lt;span style="color:#a6e22e"> [HttpGet]&lt;/span>
+&lt;span style="color:#a6e22e"> [HeaderConstraint(&amp;#34;MyHeader&amp;#34;, &amp;#34;A&amp;#34;)]&lt;/span>
+&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> GetStringA()
+{
+&lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;A&amp;#34;&lt;/span>;
+}
+&lt;span style="color:#a6e22e">
+&lt;/span>&lt;span style="color:#a6e22e"> [HttpGet]&lt;/span>
+&lt;span style="color:#a6e22e"> [HeaderConstraint(&amp;#34;MyHeader&amp;#34;, &amp;#34;B&amp;#34;)]&lt;/span>
+&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> GetStringB()
+{
+&lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;B&amp;#34;&lt;/span>;
+}
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>There are 2 things to notice here:&lt;/p>
+&lt;ul>
+&lt;li>Both functions are HTTP Get, to the same route (&lt;code>/api/action&lt;/code> in this case)&lt;/li>
+&lt;li>We&amp;rsquo;ve added the &lt;code>HeaderConstraintAttribute&lt;/code> on each route&lt;/li>
+&lt;/ul>
+&lt;p>Now, try using your HTTP API tool of choice, such as &lt;a href="https://www.getpostman.com/">Postman&lt;/a> or &lt;a href="https://insomnia.rest/">Insomnia&lt;/a>, and do a GET request to &lt;code>/api/action&lt;/code>.&lt;/p>
+&lt;p>You should be getting a 404 Not Found error, which makes sense, since both routes are contrained, and neither are matching the contraint.&lt;/p>
+&lt;p>Now, try passing a header called &lt;code>MyHeader&lt;/code> with the value &lt;code>A&lt;/code>.&lt;/p>
+&lt;p>Surprise! The API returns &lt;code>A&lt;/code>. Change the header value to &lt;code>B&lt;/code>, the API now returns &lt;code>B&lt;/code>.&lt;/p>
+&lt;p>This is obviously a very simple scenario, but when dealing with 3rd party APIs that sends different requests to the same address, it&amp;rsquo;s a great way to keep the routes seperated, use strong-typed classes and avoid using things like &lt;code>dynamic&lt;/code> variables.&lt;/p>
+&lt;p>You can view the entire code written for this project on &lt;a href="https://github.com/EricStG/ActionConstraintDemo">GitHub&lt;/a>.&lt;/p></description></item></channel></rss>

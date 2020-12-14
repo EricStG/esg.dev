@@ -1,1 +1,28 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Terraform on ESG's</title><link>https://esg.dev/tags/terraform/</link><description>Recent content in Terraform on ESG's</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 21 Sep 2019 19:57:59 -0400</lastBuildDate><atom:link href="https://esg.dev/tags/terraform/index.xml" rel="self" type="application/rss+xml"/><item><title>State management with Terraform</title><link>https://esg.dev/posts/on-terraform/</link><pubDate>Sat, 21 Sep 2019 19:57:59 -0400</pubDate><guid>https://esg.dev/posts/on-terraform/</guid><description>An horror story about state management in Terraform</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Terraform on ESG's</title><link>https://esg.dev/tags/terraform/</link><description>Recent content in Terraform on ESG's</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 21 Sep 2019 19:57:59 -0400</lastBuildDate><atom:link href="https://esg.dev/tags/terraform/index.xml" rel="self" type="application/rss+xml"/><item><title>State management with Terraform</title><link>https://esg.dev/posts/on-terraform/</link><pubDate>Sat, 21 Sep 2019 19:57:59 -0400</pubDate><guid>https://esg.dev/posts/on-terraform/</guid><description>&lt;p>&lt;a href="https://www.terraform.io/">Terraform&lt;/a> is a great tool. While I&amp;rsquo;m not super found of &lt;a href="https://yaml.org/">YAML&lt;/a>, the syntax allows for organizing your infrastructure in a clean way.&lt;/p>
+&lt;p>As as they say, cleanliness is Godliness.&lt;/p>
+&lt;p>However, there is something that I was was more explicit in the guides and tutorials I was following.&lt;/p>
+&lt;h2 id="state-management-in-terraform">State management in Terraform&lt;/h2>
+&lt;p>Terraform keeps track of whatever action was applied through it&amp;rsquo;s &lt;a href="https://www.terraform.io/docs/state/index.html">state&lt;/a>. By default, this state is stored on your local drive where your templates are stored.&lt;/p>
+&lt;p>This is what happened to me:&lt;/p>
+&lt;ol>
+&lt;li>Setup the terraform templates&lt;/li>
+&lt;li>Plan and apply them&lt;/li>
+&lt;li>Do some tweaks, add some stuff&lt;/li>
+&lt;li>Plan &amp;amp; apply&lt;/li>
+&lt;li>Repeat 3-4 a bunch of times&lt;/li>
+&lt;/ol>
+&lt;p>Now I&amp;rsquo;m happy with the template, everything is good. Let&amp;rsquo;s throw that in an Azure DevOps pipeline.&lt;/p>
+&lt;p>This, my friends, is where things went horribly terrible wrong.&lt;/p>
+&lt;p>Since the state was on my local drive, Terraform tried recreating my resources every time the template was applied. And it was applied successfully somehow, too! The result was that now I had a bunch of copies of the same resource. Route 53 zones with the same names, S3 buckets too. It wasn&amp;rsquo;t great.&lt;/p>
+&lt;p>Lesson learned! Setup a &lt;a href="https://www.terraform.io/docs/backends/index.html">backend&lt;/a>.&lt;/p>
+&lt;p>Terraform allows to store the state in share space, such as S3 buckets. Note that there&amp;rsquo;s a new-ish offering &lt;a href="https://www.terraform.io/docs/cloud/index.html">Terraform Cloud&lt;/a> which will allow you to not only store the state, but manage your configuration and provisioning, but that&amp;rsquo;s a story for another time&amp;hellip;&lt;/p>
+&lt;p>I decided to use S3 to host the state since I was planning to host the site on AWS anyway. All I had to do was create a new S3 bucket in my AWS account and modify my Terraform configuration to include a &lt;code>backend&lt;/code> section.&lt;/p>
+&lt;p>Here&amp;rsquo;s how it looks:&lt;/p>
+&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-HCL" data-lang="HCL">&lt;span style="color:#66d9ef">terraform&lt;/span> {
+&lt;span style="color:#66d9ef">backend&lt;/span> &lt;span style="color:#e6db74">&amp;#34;s3&amp;#34;&lt;/span> {
+bucket &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;blog-terraform-state&amp;#34;&lt;/span>&lt;span style="color:#75715e"> # The name of the bucket to use
+&lt;/span>&lt;span style="color:#75715e">&lt;/span> key &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;terraform.tfstate&amp;#34;&lt;/span>&lt;span style="color:#75715e"> # The name of the file within the bucket
+&lt;/span>&lt;span style="color:#75715e">&lt;/span> region &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;us-east-1&amp;#34;&lt;/span>&lt;span style="color:#75715e"> # The AWS region to store the bucket in
+&lt;/span>&lt;span style="color:#75715e">&lt;/span> }
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once I had the backend properly configured, it didn&amp;rsquo;t matter if I applied the configuration locally or if I did through a remote pipeline. They all shared the same state, and this lived in harmony forever and ever.&lt;/p></description></item></channel></rss>
