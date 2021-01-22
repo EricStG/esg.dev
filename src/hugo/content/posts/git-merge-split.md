@@ -1,6 +1,7 @@
 ---
 title: "Stupid Git tricks: Merging and splitting repositories"
 date: 2020-09-21T14:01:55-04:00
+lastmod: 2021-01-22T17:15:00-05:00
 summary: Merging and splitting git repositories without losing history your entire history.
 tags:
 - git
