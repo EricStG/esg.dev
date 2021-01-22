@@ -4,6 +4,7 @@ date: 2019-09-21T19:57:59-04:00
 summary: An horror story about state management in Terraform
 tags:
 - Terraform
+keywords: Terraform, Backend
 ---
 [Terraform](https://www.terraform.io/) is a great tool. While I'm not super found of [YAML](https://yaml.org/), the syntax allows for organizing your infrastructure in a clean way.
 

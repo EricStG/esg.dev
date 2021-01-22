@@ -4,6 +4,7 @@ date: 2020-09-21T14:01:55-04:00
 summary: Merging and splitting git repositories without losing history your entire history.
 tags:
 - git
+keywords: git
 ---
 
 Maybe it's due to working mainly in small shops, but I've had to merge and split git repositories a number of times in the past few years (usually related to folks pushing for microservice architecture, and then changing their minds).

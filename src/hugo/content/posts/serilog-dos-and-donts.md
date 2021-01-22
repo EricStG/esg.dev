@@ -5,6 +5,7 @@ summary: Some tips on how to effectively use structure logging using Serilog
 tags:
 - Serilog
 - .NET
+keywords: Serilog, .NET, Structured Logs
 ---
 
 [Serilog](https://serilog.net/) is a structured logger for [.NET](https://dotnet.microsoft.com/), and as such, for folks who are used to traditional console loggers, requires the developer to think about their logs a little more than normal.

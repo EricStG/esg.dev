@@ -5,8 +5,9 @@ summary: Adding constraints to a route in ASP.NET Core using by implementing IAc
 tags:
 - ASP.NET Core
 - .NET
-
+keywords: .Net, .NET Core, ASP.NET Core, Action Constraints
 ---
+
 Ever had to integrate a 3rd party webhook into your application, only to realize that they won't let you configure a different address for each type of events?
 
 A few years ago, I had to do just that for Github webhooks. Thankfully, they provide a HTTP header that describe the type of event being sent.

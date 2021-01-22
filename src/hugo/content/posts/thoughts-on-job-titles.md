@@ -4,6 +4,7 @@ date: 2020-10-24T20:15:26-04:00
 summary: Software development job titles tend to mean a number of various things to different folks. Here are my thoughts on those.
 tags:
 - Career
+keywords: Career, Job Titles, Software Development
 ---
 
 Job titles are funny thing. Their meanings vary so wildly that they should hold no importance at all. For example, I've seen postings for "Senior software developer" where the amount of required experience varied from 5 to over 10 years of experience. That's a pretty big gap!

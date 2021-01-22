@@ -1,4 +1,4 @@
-module https: //github.com/theNewDynamic/gohugo-theme-ananke
+module github.com/EricStG/esg.dev
 
 go 1.15
 

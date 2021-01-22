@@ -4,7 +4,7 @@ date: 2021-01-22T17:01:55-05:00
 summary: Using the HttpClient with System.Text.Json with System.Net.Http.Json.
 tags:
 - .net
-keywords: .NET, HttpClient, Json, System.Text.Json, System.Net.Http.Json, Microsoft.AspNet.WebApi.Client
+keywords: .NET, .NET Core, HttpClient, Json, System.Text.Json, System.Net.Http.Json, Microsoft.AspNet.WebApi.Client
 ---
 
 When working with JSON and `HttpClient` in the .NET Framework, it was pretty common to add a reference to [Microsoft.AspNet.WebApi.Client](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Client/), which added a number of extension methods to `HttpClient` and `HttpResponseMessage` that made it simpler to send and receive JSON documents.

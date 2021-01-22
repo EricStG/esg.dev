@@ -55,3 +55,12 @@ show_reading_time = false
     anonymizeIP = true
     respectDoNotTrack = true
     useSessionStorage = true
+
+[related]
+  includeNewer = true
+  threshold = 80
+  toLower = false
+
+  [[related.indices]]
+    name = "keywords"
+    weight = 100
