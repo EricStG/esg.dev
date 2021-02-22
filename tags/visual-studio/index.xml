@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>visual studio on ESG's</title><link>https://esg.dev/tags/visual-studio/</link><description>Recent content in visual studio on ESG's</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 21 Feb 2021 19:01:55 -0500</lastBuildDate><atom:link href="https://esg.dev/tags/visual-studio/index.xml" rel="self" type="application/rss+xml"/><item><title>Editorconfig integration with Visual Studio and .NET</title><link>https://esg.dev/posts/editorconfig-with-visual-studio/</link><pubDate>Sun, 21 Feb 2021 19:01:55 -0500</pubDate><guid>https://esg.dev/posts/editorconfig-with-visual-studio/</guid><description>&lt;p>If you are not familiar with &lt;a href="https://editorconfig.org/">EditorConfig&lt;/a> files, you&amp;rsquo;re missing out&lt;/p>
+&lt;p>Today, I&amp;rsquo;ll walk you through some of the basic features, as well as some extensions to the format supported by Visual Studio and the .NET tools.&lt;/p>
+&lt;h1 id="the-basics">The basics&lt;/h1>
+&lt;p>Editorconfig is a way to define some coding styles by adding files called &lt;code>.editorconfig&lt;/code> to your code repository.
+There&amp;rsquo;s pretty wide support from editors out there that supports it either natively, like &lt;a href="https://docs.microsoft.com/en-us/visualstudio/ide/create-portable-custom-editor-options?view=vs-2019">Visual Studio&lt;/a>, or through add-ons, like &lt;a href="https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig">Visual Studio Code&lt;/a>.&lt;/p>
+&lt;h2 id="hierarchy">Hierarchy&lt;/h2>
+&lt;p>Editorconfig us a hierarchical configuration for code style, meaning that when a code file is open, it will apply every settings from &lt;code>.editorconfig&lt;/code> files it finds, from the file&amp;rsquo;s folder, up to the root of the file system.&lt;/p>
+&lt;p>The closer to the code file the config is, the higher the priority.&lt;/p>
+&lt;p>You can make prevent scanning parent directories by specifying &lt;code>root = true&lt;/code> in your &lt;code>.editorconfig file&lt;/code>.&lt;/p>
+&lt;h2 id="syntax">Syntax&lt;/h2>
+&lt;p>Editorconfig files are split into sections. Each section starts with a file selector, as determined by square brackets &lt;code>[]&lt;/code>.&lt;/p>
+&lt;p>This selector can apply to every file like &lt;code>[*]&lt;/code>, a simple wildcard like &lt;code>[*.json]&lt;/code>, or a list of extensions like &lt;code>[*.{cs, vb}]&lt;/code>&lt;/p>
+&lt;p>Consider the following example:&lt;/p>
+&lt;pre>&lt;code>root = true
+[*]
+indent_style = space
+[*.{cs,vb}]
+indent_size = 4
+insert_final_newline = true
+charset = utf-8-bom
+&lt;/code>&lt;/pre>&lt;p>First, we have &lt;code>root = true&lt;/code>, meaning that we won&amp;rsquo;t be scanning any parent folders for more &lt;code>.editorconfig&lt;/code> files.&lt;/p>
+&lt;p>Then, we have a &lt;code>[*]&lt;/code> block that applies to every file, saying we will be using &lt;a href="https://www.youtube.com/watch?v=SsoOG6ZeyUI">space&lt;/a> to indent.&lt;/p>
+&lt;p>And last, we have the &lt;code>[*.{cs,vb}]&lt;/code> block that will apply to all files with a &lt;code>.cs&lt;/code> or &lt;code>.vb&lt;/code> extension.
+Those files will have a indent of 4 (using spaces since the content of the &lt;code>[*]&lt;/code> block is still being applied), we want to ensure the presence of an empty line at the end of each file, and we are using the UTF-8 character set with the byte order mark.&lt;/p>
+&lt;p>Tip: If using git, you will want to make sure that your &lt;a href="https://git-scm.com/docs/gitattributes">gitattribute&lt;/a> don&amp;rsquo;t conflict with your &lt;code>.editorconfig&lt;/code> settings, otherwise your editor might trying to undo what git is doing on checkout, causing a bunch of changes that aren&amp;rsquo;t wanted.&lt;/p>
+&lt;h2 id="net-specific-extensions">.NET specific extensions&lt;/h2>
+&lt;p>With the Roslyn compiler, there&amp;rsquo;s a number of extensions to the Editorconfig format that allows to configure code analysis.&lt;/p>
+&lt;p>For example, you can use Editorconfig to tell whether using clauses should be sorted with the &lt;code>System&lt;/code> namespace first&lt;/p>
+&lt;pre>&lt;code>[*.{cs,vb}]
+dotnet_sort_system_directives_first = true
+&lt;/code>&lt;/pre>&lt;p>You want contributors to use &lt;code>var&lt;/code> for C# built-in types? Done!&lt;/p>
+&lt;pre>&lt;code>csharp_style_var_for_built_in_types = true
+&lt;/code>&lt;/pre>&lt;p>You can even make it an error:&lt;/p>
+&lt;pre>&lt;code>csharp_style_var_for_built_in_types = true:error
+&lt;/code>&lt;/pre>&lt;p>You can also configure casing, as well as prefix and suffix. This will give a warning for any fields that are not camel case, and not prefixed with an underscore &lt;code>_&lt;/code>.&lt;/p>
+&lt;pre>&lt;code>dotnet_naming_rule.instance_fields_should_be_camel_case.severity = warning
+dotnet_naming_rule.instance_fields_should_be_camel_case.symbols = instance_fields
+dotnet_naming_rule.instance_fields_should_be_camel_case.style = instance_field_style
+dotnet_naming_symbols.instance_fields.applicable_kinds = field
+dotnet_naming_style.instance_field_style.capitalization = camel_case
+dotnet_naming_style.instance_field_style.required_prefix = _
+&lt;/code>&lt;/pre>&lt;p>See the &lt;a href="https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/overview">official documentation&lt;/a> for more options. The [Roslyn .editorconfig] also has number of good examples.&lt;/p>
+&lt;h2 id="configuring-code-analysis">Configuring code analysis&lt;/h2>
+&lt;p>If you&amp;rsquo;re familiar with Visual Studio and Code Analysis, you might have had to configure it through xml via &lt;a href="https://docs.microsoft.com/en-us/visualstudio/code-quality/using-rule-sets-to-group-code-analysis-rules?view=vs-2019">.ruleset&lt;/a> files.&lt;/p>
+&lt;p>That&amp;rsquo;s no longer necessary, as it can be done through Editorconfig!&lt;/p>
+&lt;p>All you need is a line that reads &lt;code>dotnet_diagnostic.&amp;lt;Code&amp;gt;.severity = &amp;lt;Severity&amp;gt;&lt;/code>, such as:&lt;/p>
+&lt;pre>&lt;code>[*.{cs,vb}]
+dotnet_diagnostic.RCS1007.severity = error
+&lt;/code>&lt;/pre>&lt;h1 id="conclusion">Conclusion&lt;/h1>
+&lt;p>Whenever you a small or a large team, having common code styles in your project can help minimize head scratching when reading a teammate&amp;rsquo;s code (or let&amp;rsquo;s be honest, your past self&amp;rsquo;s code as well).
+With Editorconfig, you have a standard way that&amp;rsquo;s not tied to specific technologies to help make those styling standard happens.&lt;/p>
+&lt;p>What coding styles do you apply to your project?&lt;/p></description></item></channel></rss>
