@@ -1,7 +1,7 @@
 ---
 title: "Serilog Do's and Don'ts"
 date: 2020-07-12T18:08:20-04:00
-lastmod: 2021-01-22T17:15:00-05:00
+lastmod: 2021-02-23T12:45:00-05:00
 summary: Some tips on how to effectively use structure logging using Serilog
 tags:
 - Serilog
@@ -248,6 +248,6 @@ Note that this behaviour can change depending on your sink. For example, the [El
 ### TLDR
 **DO** use Serilog's overloads to pass exceptions instead of using the argument list.
 
-# Conclusion
+## Conclusion
 
 Those were just a few basic things to keep in mind when using Serilog. I stringly suggest visiting the [Writing log events](https://github.com/serilog/serilog/wiki/Writing-Log-Events) page for more information.
