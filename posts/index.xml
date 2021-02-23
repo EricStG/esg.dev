@@ -297,7 +297,7 @@ jsonLogger.Information(exception, &lt;span style="color:#e6db74">&amp;#34;Except
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Note that this behaviour can change depending on your sink. For example, the &lt;a href="https://github.com/serilog/serilog-sinks-elasticsearch">Elasticsearch sink&lt;/a> will include the exceptions within an object array.&lt;/p>
 &lt;h3 id="tldr-2">TLDR&lt;/h3>
 &lt;p>&lt;strong>DO&lt;/strong> use Serilog&amp;rsquo;s overloads to pass exceptions instead of using the argument list.&lt;/p>
-&lt;h1 id="conclusion">Conclusion&lt;/h1>
+&lt;h2 id="conclusion">Conclusion&lt;/h2>
 &lt;p>Those were just a few basic things to keep in mind when using Serilog. I stringly suggest visiting the &lt;a href="https://github.com/serilog/serilog/wiki/Writing-Log-Events">Writing log events&lt;/a> page for more information.&lt;/p></description></item><item><title>Using Let's Encrypt with Azure CDN</title><link>https://esg.dev/posts/letsencrypt-on-azurecdn/</link><pubDate>Thu, 16 Apr 2020 14:17:03 -0400</pubDate><guid>https://esg.dev/posts/letsencrypt-on-azurecdn/</guid><description>&lt;p>As I was in the process of moving this blog from AWS to Azure, I found myself in an interesting position.&lt;/p>
 &lt;p>Azure CDN can provision a certificate for HTTPS on its own, unless you are using the root domain (ex: &lt;code>esg.dev&lt;/code>), in which case you need to provide your own.&lt;/p>
 &lt;p>I figured the cheapest way would be to use &lt;a href="https://letsencrypt.org/">Let&amp;rsquo;s Encrypt&lt;/a>, since it&amp;rsquo;s free. And Azure already supports it.&lt;/p>
