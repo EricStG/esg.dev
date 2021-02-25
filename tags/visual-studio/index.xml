@@ -49,4 +49,4 @@ dotnet_diagnostic.RCS1007.severity = error
 &lt;/code>&lt;/pre>&lt;h1 id="conclusion">Conclusion&lt;/h1>
 &lt;p>Whenever you a small or a large team, having common code styles in your project can help minimize head scratching when reading a teammate&amp;rsquo;s code (or let&amp;rsquo;s be honest, your past self&amp;rsquo;s code as well).
 With Editorconfig, you have a standard way that&amp;rsquo;s not tied to specific technologies to help make those styling standard happens.&lt;/p>
-&lt;p>What coding styles do you apply to your project?&lt;/p></description></item></channel></rss>
+&lt;p>What coding styles do you apply to your project?&lt;/p></description><category>visual studio</category><category>.net</category></item></channel></rss>

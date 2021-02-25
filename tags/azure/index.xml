@@ -40,4 +40,4 @@ sudo apt-get update
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>And then convert/upload the new certificate to your vault. You&amp;rsquo;ll also need to update your custom domains in Azure CDN to use the newer version of the certificate.&lt;/p>
 &lt;h2 id="next-steps">Next steps&lt;/h2>
 &lt;p>There are a few solutions out there to do this, but I&amp;rsquo;ve had had no real luck getting them working, and I wanted to understand the process by doing it manually first anyway.&lt;/p>
-&lt;p>I&amp;rsquo;ll be looking at automating this in the near future as I&amp;rsquo;ll probably forget to do this every 90 days, so stay tuned!&lt;/p></description></item></channel></rss>
+&lt;p>I&amp;rsquo;ll be looking at automating this in the near future as I&amp;rsquo;ll probably forget to do this every 90 days, so stay tuned!&lt;/p></description><category>Azure</category><category>Let's Encrypt</category></item></channel></rss>

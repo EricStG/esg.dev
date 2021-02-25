@@ -25,4 +25,4 @@ bucket &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74"
 &lt;/span>&lt;span style="color:#75715e">&lt;/span> region &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;us-east-1&amp;#34;&lt;/span>&lt;span style="color:#75715e"> # The AWS region to store the bucket in
 &lt;/span>&lt;span style="color:#75715e">&lt;/span> }
 }
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once I had the backend properly configured, it didn&amp;rsquo;t matter if I applied the configuration locally or if I did through a remote pipeline. They all shared the same state, and this lived in harmony forever and ever.&lt;/p></description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once I had the backend properly configured, it didn&amp;rsquo;t matter if I applied the configuration locally or if I did through a remote pipeline. They all shared the same state, and this lived in harmony forever and ever.&lt;/p></description><category>Terraform</category></item></channel></rss>

@@ -138,4 +138,4 @@ jsonLogger.Information(exception, &lt;span style="color:#e6db74">&amp;#34;Except
 &lt;h3 id="tldr-2">TLDR&lt;/h3>
 &lt;p>&lt;strong>DO&lt;/strong> use Serilog&amp;rsquo;s overloads to pass exceptions instead of using the argument list.&lt;/p>
 &lt;h2 id="conclusion">Conclusion&lt;/h2>
-&lt;p>Those were just a few basic things to keep in mind when using Serilog. I stringly suggest visiting the &lt;a href="https://github.com/serilog/serilog/wiki/Writing-Log-Events">Writing log events&lt;/a> page for more information.&lt;/p></description></item></channel></rss>
+&lt;p>Those were just a few basic things to keep in mind when using Serilog. I stringly suggest visiting the &lt;a href="https://github.com/serilog/serilog/wiki/Writing-Log-Events">Writing log events&lt;/a> page for more information.&lt;/p></description><category>Serilog</category><category>.NET</category></item></channel></rss>

@@ -38,4 +38,4 @@ src/B
 &lt;p>This will remove everything that is NOT under &lt;code>src/A&lt;/code> and move the content to the root of the repository.&lt;/p>
 &lt;p>Repeat the same operation for your second clone, changing &lt;code>src/A&lt;/code> to &lt;code>src/B&lt;/code>, and you are done!&lt;/p>
 &lt;h1 id="conclusion">Conclusion&lt;/h1>
-&lt;p>These are some of the ways I&amp;rsquo;ve used in the past to split and merge git repositories. What are yours? Hit me up on &lt;a href="https://twitter.com/Eric_STG">twitter&lt;/a>!&lt;/p></description></item></channel></rss>
+&lt;p>These are some of the ways I&amp;rsquo;ve used in the past to split and merge git repositories. What are yours? Hit me up on &lt;a href="https://twitter.com/Eric_STG">twitter&lt;/a>!&lt;/p></description><category>git</category></item></channel></rss>

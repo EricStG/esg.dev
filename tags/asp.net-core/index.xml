@@ -58,4 +58,4 @@ Value = &lt;span style="color:#66d9ef">value&lt;/span>;
 &lt;p>Now, try passing a header called &lt;code>MyHeader&lt;/code> with the value &lt;code>A&lt;/code>.&lt;/p>
 &lt;p>Surprise! The API returns &lt;code>A&lt;/code>. Change the header value to &lt;code>B&lt;/code>, the API now returns &lt;code>B&lt;/code>.&lt;/p>
 &lt;p>This is obviously a very simple scenario, but when dealing with 3rd party APIs that sends different requests to the same address, it&amp;rsquo;s a great way to keep the routes seperated, use strong-typed classes and avoid using things like &lt;code>dynamic&lt;/code> variables.&lt;/p>
-&lt;p>You can view the entire code written for this project on &lt;a href="https://github.com/EricStG/ActionConstraintDemo">GitHub&lt;/a>.&lt;/p></description></item></channel></rss>
+&lt;p>You can view the entire code written for this project on &lt;a href="https://github.com/EricStG/ActionConstraintDemo">GitHub&lt;/a>.&lt;/p></description><category>ASP.NET Core</category><category>.NET</category></item></channel></rss>
