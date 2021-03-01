@@ -101,7 +101,7 @@ textLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp
 &lt;pre>&lt;code>[18:19:18 INF] Hello World
 [18:19:18 INF] Hello World
 &lt;/code>&lt;/pre>&lt;p>Can you spot the difference? Spoiler: There isn&amp;rsquo;t one! So what&amp;rsquo;s the problem then?&lt;/p>
-&lt;p>Well, let&amp;rsquo;s use the &lt;a href="https://github.com/serilog/serilog-formatting-compact">JSOM Formatter&lt;/a> instead:&lt;/p>
+&lt;p>Well, let&amp;rsquo;s use the &lt;a href="https://github.com/serilog/serilog-formatting-compact">JSON Formatter&lt;/a> instead:&lt;/p>
 &lt;p>(note: I&amp;rsquo;m using the &lt;a href="https://github.com/serilog/serilog-formatting-compact#rendered-events">Rendered&lt;/a> formatter so we can see the rendered template within each event)&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">var&lt;/span> jsonLogger = Log.Logger = &lt;span style="color:#66d9ef">new&lt;/span> LoggerConfiguration()
 .WriteTo.Console(&lt;span style="color:#66d9ef">new&lt;/span> RenderedCompactJsonFormatter())
@@ -126,7 +126,7 @@ In addition, the &lt;code>@i&lt;/code> field will have the same value every time
 &lt;h3 id="tldr">TLDR&lt;/h3>
 &lt;p>&lt;strong>DON&amp;rsquo;T&lt;/strong> format messages before passing them to the logger&lt;/p>
 &lt;h2 id="destructuring">Destructuring&lt;/h2>
-&lt;p>One of the benefit of having a structured logger versus a flat one, is, well, &lt;em>structure&lt;/em>. You are not limited to logging simple values, you can include entire object graphs. This process is called &lt;em>Destructuring&lt;/em>&lt;/p>
+&lt;p>One of the benefit of having a structured logger versus a flat one, is, well, &lt;em>structure&lt;/em>. You are not limited to logging simple values, you can include entire object graphs. This process is called &lt;em>Destructuring&lt;/em>.&lt;/p>
 &lt;p>Let&amp;rsquo;s consider the following classes&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">TestInnerClass&lt;/span>
 {
@@ -188,7 +188,7 @@ SomeProperty = &lt;span style="color:#e6db74">&amp;#34;I am a property at the ro
 }
 }
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>We only included the property we wanted!&lt;/p>
-&lt;p>Note that there are different ways to configure destructuring. A good start in the (awesomely named) &lt;a href="https://github.com/destructurama%5D">Destructurama!&lt;/a> organization.&lt;/p>
+&lt;p>Note that there are different ways to configure destructuring. A good start in the (awesomely named) &lt;a href="https://github.com/destructurama">Destructurama!&lt;/a> organization.&lt;/p>
 &lt;h3 id="type-conflicts">Type conflicts&lt;/h3>
 &lt;p>Just a side note about destructing objects regarding conflicting types. Some log aggregating services will use the parameter names within templates to define types.&lt;/p>
 &lt;p>An example of this is Elasticsearch.&lt;/p>
@@ -204,7 +204,7 @@ jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp
 &lt;p>The one thing to remember is that Serilog&amp;rsquo;s methods all have an overload that accepts an &lt;code>Exception&lt;/code> as the first parameter.&lt;/p>
 &lt;p>So instead of writing statements including the exception as part of the message template&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">var&lt;/span> exception = &lt;span style="color:#66d9ef">new&lt;/span> Exception(&lt;span style="color:#e6db74">&amp;#34;Top exception&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">new&lt;/span> Exception(&lt;span style="color:#e6db74">&amp;#34;Inner exception&amp;#34;&lt;/span>));
-jsonLogger.Information(exception, &lt;span style="color:#e6db74">&amp;#34;Exception&amp;#34;&lt;/span>);
+jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Exception! {exception}&amp;#34;&lt;/span>, exception);
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>Which will include the exception within the &lt;code>exception&lt;/code> parameter&lt;/p>
 &lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
 &lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T23:01:14.1165769Z&amp;#34;&lt;/span>,
