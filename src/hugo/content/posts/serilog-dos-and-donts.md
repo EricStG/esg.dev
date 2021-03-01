@@ -1,7 +1,7 @@
 ---
 title: "Serilog Do's and Don'ts"
 date: 2020-07-12T18:08:20-04:00
-lastmod: 2021-02-23T12:45:00-05:00
+lastmod: 2021-03-01T13:30:00-05:00
 summary: Some tips on how to effectively use structure logging using Serilog
 tags:
 - Serilog
@@ -41,7 +41,7 @@ Will output:
 
 Can you spot the difference? Spoiler: There isn't one! So what's the problem then?
 
-Well, let's use the [JSOM Formatter](https://github.com/serilog/serilog-formatting-compact) instead:
+Well, let's use the [JSON Formatter](https://github.com/serilog/serilog-formatting-compact) instead:
 
 (note: I'm using the [Rendered](https://github.com/serilog/serilog-formatting-compact#rendered-events) formatter so we can see the rendered template within each event)
 
@@ -82,7 +82,7 @@ In addition, the `@i` field will have the same value every time this statement w
 
 ## Destructuring
 
-One of the benefit of having a structured logger versus a flat one, is, well, *structure*. You are not limited to logging simple values, you can include entire object graphs. This process is called *Destructuring*
+One of the benefit of having a structured logger versus a flat one, is, well, *structure*. You are not limited to logging simple values, you can include entire object graphs. This process is called *Destructuring*.
 
 Let's consider the following classes
 
@@ -181,7 +181,7 @@ Will give us
 
 We only included the property we wanted!
 
-Note that there are different ways to configure destructuring. A good start in the (awesomely named) [Destructurama!](https://github.com/destructurama]) organization.
+Note that there are different ways to configure destructuring. A good start in the (awesomely named) [Destructurama!](https://github.com/destructurama) organization.
 
 ### Type conflicts
 
@@ -211,7 +211,7 @@ So instead of writing statements including the exception as part of the message 
 
 ```cs
 var exception = new Exception("Top exception", new Exception("Inner exception"));
-jsonLogger.Information(exception, "Exception");
+jsonLogger.Information("Exception! {exception}", exception);
 ```
 
 Which will include the exception within the `exception` parameter
