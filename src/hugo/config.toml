@@ -8,9 +8,7 @@ googleAnalytics = "UA-145113644-1"
 enableRobotsTXT = true
 show_reading_time = false
 
-[module]
-  [[module.imports]]
-    path = "github.com/theNewDynamic/gohugo-theme-ananke"
+theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
 
 [sitemap]
   changefreq = "monthly"
