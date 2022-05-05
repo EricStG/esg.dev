@@ -15,7 +15,7 @@ jobs:
     - name: Publish Site
       uses: chabad360/hugo-gh-pages@master
       with:
-        githubToken: ${{ GITHUB_TOKEN  }}
+        githubToken: ${{ secrets.GITHUB_TOKEN  }}
         cname: esg.dev
         siteDir: /github/workspace/src/hugo
         args: --gc --minify --cleanDestinationDir
