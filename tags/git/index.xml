@@ -9,7 +9,7 @@
 &lt;h2 id="step-1-organization">Step 1: Organization&lt;/h2>
 &lt;p>In order to save yourself some headaches, it&amp;rsquo;s better to plan ahead how you want the final repository layout to be. You&amp;rsquo;ll also want to move files around to avoid any conflicts.&lt;/p>
 &lt;p>For simplicity, I want the end result to be:&lt;/p>
-&lt;pre>&lt;code>src/A
+&lt;pre tabindex="0">&lt;code>src/A
 src/B
 &lt;/code>&lt;/pre>&lt;p>In the &lt;code>A&lt;/code> repository, using whatever tools you want, create the &lt;code>src/A&lt;/code> directory and move everything in there.&lt;/p>
 &lt;p>After that, execute &lt;code>git add -A&lt;/code> to update the index and make sure you &lt;code>git commit&lt;/code>.&lt;/p>
@@ -21,7 +21,7 @@ src/B
 &lt;p>Once that&amp;rsquo;s done, check the content of your repository and your &lt;code>git log&lt;/code> to make sure that everything is good, and then you are done!&lt;/p>
 &lt;h1 id="splitting">Splitting&lt;/h1>
 &lt;p>In this scenario, we&amp;rsquo;ll be reverting the changes we&amp;rsquo;ve done above, going from 1 repository containing:&lt;/p>
-&lt;pre>&lt;code>src/A
+&lt;pre tabindex="0">&lt;code>src/A
 src/B
 &lt;/code>&lt;/pre>&lt;p>and split them back into 2 repositories, with the content at the root of each ones.&lt;/p>
 &lt;h2 id="danger-will-robinson">Danger Will Robinson&lt;/h2>

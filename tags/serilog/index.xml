@@ -3,111 +3,112 @@
 &lt;h2 id="templating">Templating&lt;/h2>
 &lt;p>One thing to keep in mind is that when writing an event to the log, you are not passing a message, but a &lt;em>template&lt;/em>. The tags you pass within curly branches do have meaning, and will be used to add data the event. It is therefore important to not format the message before passing logging it.&lt;/p>
 &lt;p>Consider a logger with a basic console sink&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">var&lt;/span> textLogger = Log.Logger = &lt;span style="color:#66d9ef">new&lt;/span> LoggerConfiguration()
-.WriteTo.Console()
-.CreateLogger();
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>With two very basic statements&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">textLogger.Information(&lt;span style="color:#e6db74">$&amp;#34;Hello {world}&amp;#34;&lt;/span>);
-textLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp;#34;&lt;/span>, world);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Will output:&lt;/p>
-&lt;pre>&lt;code>[18:19:18 INF] Hello World
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> textLogger = Log.Logger = &lt;span style="color:#66d9ef">new&lt;/span> LoggerConfiguration()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .WriteTo.Console()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .CreateLogger();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>With two very basic statements&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>textLogger.Information(&lt;span style="color:#e6db74">$&amp;#34;Hello {world}&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>textLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp;#34;&lt;/span>, world);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Will output:&lt;/p>
+&lt;pre tabindex="0">&lt;code>[18:19:18 INF] Hello World
 [18:19:18 INF] Hello World
 &lt;/code>&lt;/pre>&lt;p>Can you spot the difference? Spoiler: There isn&amp;rsquo;t one! So what&amp;rsquo;s the problem then?&lt;/p>
 &lt;p>Well, let&amp;rsquo;s use the &lt;a href="https://github.com/serilog/serilog-formatting-compact">JSON Formatter&lt;/a> instead:&lt;/p>
 &lt;p>(note: I&amp;rsquo;m using the &lt;a href="https://github.com/serilog/serilog-formatting-compact#rendered-events">Rendered&lt;/a> formatter so we can see the rendered template within each event)&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">var&lt;/span> jsonLogger = Log.Logger = &lt;span style="color:#66d9ef">new&lt;/span> LoggerConfiguration()
-.WriteTo.Console(&lt;span style="color:#66d9ef">new&lt;/span> RenderedCompactJsonFormatter())
-.CreateLogger();
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>With the same statements&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">jsonLogger.Information(&lt;span style="color:#e6db74">$&amp;#34;Hello {world}&amp;#34;&lt;/span>);
-jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp;#34;&lt;/span>, world);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Will give us:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:26:19.6616913Z&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Hello World&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;00ba5a14&amp;#34;&lt;/span>
-}
-{
-&lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:26:19.6659300Z&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Hello \&amp;#34;World\&amp;#34;&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;40c34e37&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;value&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;World&amp;#34;&lt;/span>
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>When using &lt;code>textLogger.Information(&amp;quot;Hello {value}&amp;quot;, world)&lt;/code>, there is now a field called &lt;code>value&lt;/code> with the argument we passed to the logging statements.
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> jsonLogger = Log.Logger = &lt;span style="color:#66d9ef">new&lt;/span> LoggerConfiguration()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .WriteTo.Console(&lt;span style="color:#66d9ef">new&lt;/span> RenderedCompactJsonFormatter())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .CreateLogger();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>With the same statements&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>jsonLogger.Information(&lt;span style="color:#e6db74">$&amp;#34;Hello {world}&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp;#34;&lt;/span>, world);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Will give us:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:26:19.6616913Z&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Hello World&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;00ba5a14&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:26:19.6659300Z&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Hello \&amp;#34;World\&amp;#34;&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;40c34e37&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;value&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;World&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>When using &lt;code>textLogger.Information(&amp;quot;Hello {value}&amp;quot;, world)&lt;/code>, there is now a field called &lt;code>value&lt;/code> with the argument we passed to the logging statements.
 In addition, the &lt;code>@i&lt;/code> field will have the same value every time this statement will run, so you have a fixed item to search for if you want to search for every value being logged by this particular statement.&lt;/p>
 &lt;h3 id="tldr">TLDR&lt;/h3>
 &lt;p>&lt;strong>DON&amp;rsquo;T&lt;/strong> format messages before passing them to the logger&lt;/p>
 &lt;h2 id="destructuring">Destructuring&lt;/h2>
 &lt;p>One of the benefit of having a structured logger versus a flat one, is, well, &lt;em>structure&lt;/em>. You are not limited to logging simple values, you can include entire object graphs. This process is called &lt;em>Destructuring&lt;/em>.&lt;/p>
 &lt;p>Let&amp;rsquo;s consider the following classes&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">TestInnerClass&lt;/span>
-{
-&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> SomeOtherProperty { &lt;span style="color:#66d9ef">get&lt;/span>; &lt;span style="color:#66d9ef">set&lt;/span>; }
-}
-&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">TestClass&lt;/span>
-{
-&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> SomeProperty { &lt;span style="color:#66d9ef">get&lt;/span>; &lt;span style="color:#66d9ef">set&lt;/span>; }
-&lt;span style="color:#66d9ef">public&lt;/span> TestInnerClass SomeInnerClass { &lt;span style="color:#66d9ef">get&lt;/span>; &lt;span style="color:#66d9ef">set&lt;/span>; }
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Let&amp;rsquo;s initialize an instance&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">var&lt;/span> obj = &lt;span style="color:#66d9ef">new&lt;/span> TestClass
-{
-SomeInnerClass = &lt;span style="color:#66d9ef">new&lt;/span> TestInnerClass
-{
-SomeOtherProperty = &lt;span style="color:#e6db74">&amp;#34;I am a property within a child&amp;#34;&lt;/span>
-},
-SomeProperty = &lt;span style="color:#e6db74">&amp;#34;I am a property at the root level&amp;#34;&lt;/span>
-};
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>And let&amp;rsquo;s include it a logging statement&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Useful log for object {object}&amp;#34;&lt;/span>, obj);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>This will output&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:43:28.1191964Z&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Useful log for object \&amp;#34;SerilogTest.TestClass\&amp;#34;&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;146d94ee&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;object&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;SerilogTest.TestClass&amp;#34;&lt;/span>
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>What? &lt;code>SerilogTest.TestClass&lt;/code>? By default, Serilog will simply call &lt;code>ToString&lt;/code> on your object. To destructure it, simply add &lt;code>a&lt;/code> before the field in your template&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Useful log for object {@object}&amp;#34;&lt;/span>, obj);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>And the output will be&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:43:28.1525906Z&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Useful log for object TestClass { SomeProperty: \&amp;#34;I am a property at the root level\&amp;#34;, SomeInnerClass: TestInnerClass { SomeOtherProperty: \&amp;#34;I am a property within a child\&amp;#34; } }&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;99aea052&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;object&amp;#34;&lt;/span>: {
-&lt;span style="color:#f92672">&amp;#34;SomeProperty&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;I am a property at the root level&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;SomeInnerClass&amp;#34;&lt;/span>: {
-&lt;span style="color:#f92672">&amp;#34;SomeOtherProperty&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;I am a property within a child&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;$type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;TestInnerClass&amp;#34;&lt;/span>
-},
-&lt;span style="color:#f92672">&amp;#34;$type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;TestClass&amp;#34;&lt;/span>
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>As you can see, the entire object graph was included within the event. So much contextual information!&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">TestInnerClass&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> SomeOtherProperty { &lt;span style="color:#66d9ef">get&lt;/span>; &lt;span style="color:#66d9ef">set&lt;/span>; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">TestClass&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> SomeProperty { &lt;span style="color:#66d9ef">get&lt;/span>; &lt;span style="color:#66d9ef">set&lt;/span>; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> TestInnerClass SomeInnerClass { &lt;span style="color:#66d9ef">get&lt;/span>; &lt;span style="color:#66d9ef">set&lt;/span>; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Let&amp;rsquo;s initialize an instance&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> obj = &lt;span style="color:#66d9ef">new&lt;/span> TestClass
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> SomeInnerClass = &lt;span style="color:#66d9ef">new&lt;/span> TestInnerClass
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> SomeOtherProperty = &lt;span style="color:#e6db74">&amp;#34;I am a property within a child&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> SomeProperty = &lt;span style="color:#e6db74">&amp;#34;I am a property at the root level&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>};
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>And let&amp;rsquo;s include it a logging statement&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Useful log for object {object}&amp;#34;&lt;/span>, obj);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This will output&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:43:28.1191964Z&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Useful log for object \&amp;#34;SerilogTest.TestClass\&amp;#34;&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;146d94ee&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;object&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;SerilogTest.TestClass&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>What? &lt;code>SerilogTest.TestClass&lt;/code>? By default, Serilog will simply call &lt;code>ToString&lt;/code> on your object. To destructure it, simply add &lt;code>a&lt;/code> before the field in your template&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Useful log for object {@object}&amp;#34;&lt;/span>, obj);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>And the output will be&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:43:28.1525906Z&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Useful log for object TestClass { SomeProperty: \&amp;#34;I am a property at the root level\&amp;#34;, SomeInnerClass: TestInnerClass { SomeOtherProperty: \&amp;#34;I am a property within a child\&amp;#34; } }&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;99aea052&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;object&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;SomeProperty&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;I am a property at the root level&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;SomeInnerClass&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;SomeOtherProperty&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;I am a property within a child&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;$type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;TestInnerClass&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;$type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;TestClass&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>As you can see, the entire object graph was included within the event. So much contextual information!&lt;/p>
 &lt;p>But what if there are properties that you do not want to log? After all, it&amp;rsquo;s typically frowned upon to include information like passwords or personally identifiable information within them.&lt;/p>
 &lt;p>Let&amp;rsquo;s reconfigure the logger to only log &lt;code>SomeProperty&lt;/code>:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">var&lt;/span> jsonLogger = Log.Logger = &lt;span style="color:#66d9ef">new&lt;/span> LoggerConfiguration()
-.WriteTo.Console(&lt;span style="color:#66d9ef">new&lt;/span> RenderedCompactJsonFormatter())
-.Destructure.ByTransforming&amp;lt;TestClass&amp;gt;(c =&amp;gt; &lt;span style="color:#66d9ef">new&lt;/span> { c.SomeProperty })
-.CreateLogger();
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Will give us&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:49:44.7386801Z&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Useful log for object { SomeProperty: \&amp;#34;I am a property at the root level\&amp;#34; }&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;99aea052&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;object&amp;#34;&lt;/span>: {
-&lt;span style="color:#f92672">&amp;#34;SomeProperty&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;I am a property at the root level&amp;#34;&lt;/span>
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>We only included the property we wanted!&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> jsonLogger = Log.Logger = &lt;span style="color:#66d9ef">new&lt;/span> LoggerConfiguration()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .WriteTo.Console(&lt;span style="color:#66d9ef">new&lt;/span> RenderedCompactJsonFormatter())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .Destructure.ByTransforming&amp;lt;TestClass&amp;gt;(c =&amp;gt; &lt;span style="color:#66d9ef">new&lt;/span> { c.SomeProperty })
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .CreateLogger();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Will give us&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:49:44.7386801Z&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Useful log for object { SomeProperty: \&amp;#34;I am a property at the root level\&amp;#34; }&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;99aea052&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;object&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;SomeProperty&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;I am a property at the root level&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>We only included the property we wanted!&lt;/p>
 &lt;p>Note that there are different ways to configure destructuring. A good start in the (awesomely named) &lt;a href="https://github.com/destructurama">Destructurama!&lt;/a> organization.&lt;/p>
 &lt;h3 id="type-conflicts">Type conflicts&lt;/h3>
 &lt;p>Just a side note about destructing objects regarding conflicting types. Some log aggregating services will use the parameter names within templates to define types.&lt;/p>
 &lt;p>An example of this is Elasticsearch.&lt;/p>
 &lt;p>With the following statement&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;world&amp;#34;&lt;/span>);
-jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">new&lt;/span> { &lt;span style="color:#66d9ef">value&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;world&amp;#34;&lt;/span> });
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Since the first statement will generate a string field called &amp;ldquo;value&amp;rdquo; in the mapping, the second statement will not be logged, as Elasticsearch will complain about trying to fit an object within a string field.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;world&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">new&lt;/span> { &lt;span style="color:#66d9ef">value&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;world&amp;#34;&lt;/span> });
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Since the first statement will generate a string field called &amp;ldquo;value&amp;rdquo; in the mapping, the second statement will not be logged, as Elasticsearch will complain about trying to fit an object within a string field.&lt;/p>
 &lt;h3 id="tldr-1">TLDR&lt;/h3>
 &lt;p>&lt;strong>DO&lt;/strong> include object graph when they add contextual information to your statements
 &lt;strong>AVOID&lt;/strong> including unnecessary objects. They can clutter your logs, and if you&amp;rsquo;re pushing them to external services that charges by the size of logs you send them, it will quite literally cost you.
@@ -115,26 +116,26 @@ jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp
 &lt;h2 id="exceptions">Exceptions&lt;/h2>
 &lt;p>The one thing to remember is that Serilog&amp;rsquo;s methods all have an overload that accepts an &lt;code>Exception&lt;/code> as the first parameter.&lt;/p>
 &lt;p>So instead of writing statements including the exception as part of the message template&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">var&lt;/span> exception = &lt;span style="color:#66d9ef">new&lt;/span> Exception(&lt;span style="color:#e6db74">&amp;#34;Top exception&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">new&lt;/span> Exception(&lt;span style="color:#e6db74">&amp;#34;Inner exception&amp;#34;&lt;/span>));
-jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Exception! {exception}&amp;#34;&lt;/span>, exception);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Which will include the exception within the &lt;code>exception&lt;/code> parameter&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T23:01:14.1165769Z&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Exception! \&amp;#34;System.Exception: Top exception\r\n ---&amp;gt; System.Exception: Inner exception\r\n --- End of inner exception stack trace ---\&amp;#34;&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;e22b2a9a&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;exception&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;System.Exception: Top exception\r\n ---&amp;gt; System.Exception: Inner exception\r\n --- End of inner exception stack trace ---&amp;#34;&lt;/span>
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Simply include the exception as the first argument&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">var&lt;/span> exception = &lt;span style="color:#66d9ef">new&lt;/span> Exception(&lt;span style="color:#e6db74">&amp;#34;Top exception&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">new&lt;/span> Exception(&lt;span style="color:#e6db74">&amp;#34;Inner exception&amp;#34;&lt;/span>));
-jsonLogger.Information(exception, &lt;span style="color:#e6db74">&amp;#34;Exception&amp;#34;&lt;/span>);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>And now all logged exceptions will be within the &lt;code>@x&lt;/code> field.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T23:01:14.1532597Z&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Exception&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;7d53da39&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@x&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;System.Exception: Top exception\r\n ---&amp;gt; System.Exception: Inner exception\r\n --- End of inner exception stack trace ---&amp;#34;&lt;/span>
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note that this behaviour can change depending on your sink. For example, the &lt;a href="https://github.com/serilog/serilog-sinks-elasticsearch">Elasticsearch sink&lt;/a> will include the exceptions within an object array.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> exception = &lt;span style="color:#66d9ef">new&lt;/span> Exception(&lt;span style="color:#e6db74">&amp;#34;Top exception&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">new&lt;/span> Exception(&lt;span style="color:#e6db74">&amp;#34;Inner exception&amp;#34;&lt;/span>));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Exception! {exception}&amp;#34;&lt;/span>, exception);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Which will include the exception within the &lt;code>exception&lt;/code> parameter&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T23:01:14.1165769Z&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Exception! \&amp;#34;System.Exception: Top exception\r\n ---&amp;gt; System.Exception: Inner exception\r\n --- End of inner exception stack trace ---\&amp;#34;&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;e22b2a9a&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;exception&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;System.Exception: Top exception\r\n ---&amp;gt; System.Exception: Inner exception\r\n --- End of inner exception stack trace ---&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Simply include the exception as the first argument&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> exception = &lt;span style="color:#66d9ef">new&lt;/span> Exception(&lt;span style="color:#e6db74">&amp;#34;Top exception&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">new&lt;/span> Exception(&lt;span style="color:#e6db74">&amp;#34;Inner exception&amp;#34;&lt;/span>));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jsonLogger.Information(exception, &lt;span style="color:#e6db74">&amp;#34;Exception&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>And now all logged exceptions will be within the &lt;code>@x&lt;/code> field.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T23:01:14.1532597Z&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Exception&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;7d53da39&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@x&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;System.Exception: Top exception\r\n ---&amp;gt; System.Exception: Inner exception\r\n --- End of inner exception stack trace ---&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note that this behaviour can change depending on your sink. For example, the &lt;a href="https://github.com/serilog/serilog-sinks-elasticsearch">Elasticsearch sink&lt;/a> will include the exceptions within an object array.&lt;/p>
 &lt;h3 id="tldr-2">TLDR&lt;/h3>
 &lt;p>&lt;strong>DO&lt;/strong> use Serilog&amp;rsquo;s overloads to pass exceptions instead of using the argument list.&lt;/p>
 &lt;h2 id="conclusion">Conclusion&lt;/h2>

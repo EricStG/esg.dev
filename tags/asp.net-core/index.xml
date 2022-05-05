@@ -9,46 +9,50 @@
 &lt;li>&lt;code>Accept(ActionConstraintContext)&lt;/code>, which needs to return a boolean that will tell the framework whether to use this route&lt;/li>
 &lt;/ul>
 &lt;p>Let&amp;rsquo;s see what an implementation can look like:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">HeaderConstraintAttribute&lt;/span> : Attribute, IActionConstraint
-{
-&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span> Order =&amp;gt; &lt;span style="color:#ae81ff">0&lt;/span>;
-&lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> Header { &lt;span style="color:#66d9ef">get&lt;/span>; }
-&lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> Value { &lt;span style="color:#66d9ef">get&lt;/span>; }
-&lt;span style="color:#66d9ef">public&lt;/span> HeaderConstraintAttribute(&lt;span style="color:#66d9ef">string&lt;/span> header, &lt;span style="color:#66d9ef">string&lt;/span> &lt;span style="color:#66d9ef">value&lt;/span>)
-{
-Header = header;
-Value = &lt;span style="color:#66d9ef">value&lt;/span>;
-}
-&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">bool&lt;/span> Accept(ActionConstraintContext context)
-{
-&lt;span style="color:#66d9ef">if&lt;/span> (context.RouteContext.HttpContext.Request.Headers.TryGetValue(Header, &lt;span style="color:#66d9ef">out&lt;/span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#66d9ef">value&lt;/span>) &amp;amp;&amp;amp; &lt;span style="color:#66d9ef">value&lt;/span>.Any())
-{
-&lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">value&lt;/span>[&lt;span style="color:#ae81ff">0&lt;/span>] == Value;
-}
-&lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">false&lt;/span>;
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Simple enough, right? Look for a matching &lt;code>Header&lt;/code> in the &lt;code>HttpContext&lt;/code>, and if present, match it with &lt;code>Value&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">HeaderConstraintAttribute&lt;/span> : Attribute, IActionConstraint
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span> Order =&amp;gt; &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> Header { &lt;span style="color:#66d9ef">get&lt;/span>; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> Value { &lt;span style="color:#66d9ef">get&lt;/span>; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> HeaderConstraintAttribute(&lt;span style="color:#66d9ef">string&lt;/span> header, &lt;span style="color:#66d9ef">string&lt;/span> &lt;span style="color:#66d9ef">value&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Header = header;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Value = &lt;span style="color:#66d9ef">value&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">bool&lt;/span> Accept(ActionConstraintContext context)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (context.RouteContext.HttpContext.Request.Headers.TryGetValue(Header, &lt;span style="color:#66d9ef">out&lt;/span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#66d9ef">value&lt;/span>) &amp;amp;&amp;amp; &lt;span style="color:#66d9ef">value&lt;/span>.Any())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">value&lt;/span>[&lt;span style="color:#ae81ff">0&lt;/span>] == Value;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">false&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Simple enough, right? Look for a matching &lt;code>Header&lt;/code> in the &lt;code>HttpContext&lt;/code>, and if present, match it with &lt;code>Value&lt;/code>.&lt;/p>
 &lt;p>Now, let&amp;rsquo;s update our controller.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#a6e22e">[Route(&amp;#34;api/[controller]&lt;/span>&lt;span style="color:#e6db74">&amp;#34;)]
-&lt;/span>&lt;span style="color:#e6db74">&lt;/span>&lt;span style="color:#a6e22e">[ApiController]&lt;/span>
-&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">ActionController&lt;/span> : ControllerBase
-{
-&lt;span style="color:#a6e22e"> [HttpGet]&lt;/span>
-&lt;span style="color:#a6e22e"> [HeaderConstraint(&amp;#34;MyHeader&amp;#34;, &amp;#34;A&amp;#34;)]&lt;/span>
-&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> GetStringA()
-{
-&lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;A&amp;#34;&lt;/span>;
-}
-&lt;span style="color:#a6e22e">
-&lt;/span>&lt;span style="color:#a6e22e"> [HttpGet]&lt;/span>
-&lt;span style="color:#a6e22e"> [HeaderConstraint(&amp;#34;MyHeader&amp;#34;, &amp;#34;B&amp;#34;)]&lt;/span>
-&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> GetStringB()
-{
-&lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;B&amp;#34;&lt;/span>;
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>There are 2 things to notice here:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">[Route(&amp;#34;api/[controller]&lt;/span>&lt;span style="color:#e6db74">&amp;#34;)]
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&lt;/span>&lt;span style="color:#a6e22e">[ApiController]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">ActionController&lt;/span> : ControllerBase
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e"> [HttpGet]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e"> [HeaderConstraint(&amp;#34;MyHeader&amp;#34;, &amp;#34;A&amp;#34;)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> GetStringA()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;A&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e"> [HttpGet]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e"> [HeaderConstraint(&amp;#34;MyHeader&amp;#34;, &amp;#34;B&amp;#34;)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> GetStringB()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;B&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>There are 2 things to notice here:&lt;/p>
 &lt;ul>
 &lt;li>Both functions are HTTP Get, to the same route (&lt;code>/api/action&lt;/code> in this case)&lt;/li>
 &lt;li>We&amp;rsquo;ve added the &lt;code>HeaderConstraintAttribute&lt;/code> on each route&lt;/li>

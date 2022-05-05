@@ -54,7 +54,7 @@ There&amp;rsquo;s pretty wide support from editors out there that supports it ei
 &lt;p>Editorconfig files are split into sections. Each section starts with a file selector, as determined by square brackets &lt;code>[]&lt;/code>.&lt;/p>
 &lt;p>This selector can apply to every file like &lt;code>[*]&lt;/code>, a simple wildcard like &lt;code>[*.json]&lt;/code>, or a list of extensions like &lt;code>[*.{cs, vb}]&lt;/code>&lt;/p>
 &lt;p>Consider the following example:&lt;/p>
-&lt;pre>&lt;code>root = true
+&lt;pre tabindex="0">&lt;code>root = true
 [*]
 indent_style = space
 [*.{cs,vb}]
@@ -69,14 +69,14 @@ Those files will have a indent of 4 (using spaces since the content of the &lt;c
 &lt;h2 id="net-specific-extensions">.NET specific extensions&lt;/h2>
 &lt;p>With the Roslyn compiler, there&amp;rsquo;s a number of extensions to the Editorconfig format that allows to configure code analysis.&lt;/p>
 &lt;p>For example, you can use Editorconfig to tell whether using clauses should be sorted with the &lt;code>System&lt;/code> namespace first&lt;/p>
-&lt;pre>&lt;code>[*.{cs,vb}]
+&lt;pre tabindex="0">&lt;code>[*.{cs,vb}]
 dotnet_sort_system_directives_first = true
 &lt;/code>&lt;/pre>&lt;p>You want contributors to use &lt;code>var&lt;/code> for C# built-in types? Done!&lt;/p>
-&lt;pre>&lt;code>csharp_style_var_for_built_in_types = true
+&lt;pre tabindex="0">&lt;code>csharp_style_var_for_built_in_types = true
 &lt;/code>&lt;/pre>&lt;p>You can even make it an error:&lt;/p>
-&lt;pre>&lt;code>csharp_style_var_for_built_in_types = true:error
+&lt;pre tabindex="0">&lt;code>csharp_style_var_for_built_in_types = true:error
 &lt;/code>&lt;/pre>&lt;p>You can also configure casing, as well as prefix and suffix. This will give a warning for any fields that are not camel case, and not prefixed with an underscore &lt;code>_&lt;/code>.&lt;/p>
-&lt;pre>&lt;code>dotnet_naming_rule.instance_fields_should_be_camel_case.severity = warning
+&lt;pre tabindex="0">&lt;code>dotnet_naming_rule.instance_fields_should_be_camel_case.severity = warning
 dotnet_naming_rule.instance_fields_should_be_camel_case.symbols = instance_fields
 dotnet_naming_rule.instance_fields_should_be_camel_case.style = instance_field_style
 dotnet_naming_symbols.instance_fields.applicable_kinds = field
@@ -87,7 +87,7 @@ dotnet_naming_style.instance_field_style.required_prefix = _
 &lt;p>If you&amp;rsquo;re familiar with Visual Studio and Code Analysis, you might have had to configure it through xml via &lt;a href="https://docs.microsoft.com/en-us/visualstudio/code-quality/using-rule-sets-to-group-code-analysis-rules?view=vs-2019">.ruleset&lt;/a> files.&lt;/p>
 &lt;p>That&amp;rsquo;s no longer necessary, as it can be done through Editorconfig!&lt;/p>
 &lt;p>All you need is a line that reads &lt;code>dotnet_diagnostic.&amp;lt;Code&amp;gt;.severity = &amp;lt;Severity&amp;gt;&lt;/code>, such as:&lt;/p>
-&lt;pre>&lt;code>[*.{cs,vb}]
+&lt;pre tabindex="0">&lt;code>[*.{cs,vb}]
 dotnet_diagnostic.RCS1007.severity = error
 &lt;/code>&lt;/pre>&lt;h1 id="conclusion">Conclusion&lt;/h1>
 &lt;p>Whenever you a small or a large team, having common code styles in your project can help minimize head scratching when reading a teammate&amp;rsquo;s code (or let&amp;rsquo;s be honest, your past self&amp;rsquo;s code as well).
@@ -100,35 +100,35 @@ With Editorconfig, you have a standard way that&amp;rsquo;s not tied to specific
 &lt;p>The assumption is that you have an &lt;code>HttpClient&lt;/code> already instanciated with the name &lt;code>client&lt;/code>, a request model called &lt;code>RequestModel&lt;/code>, and a response model called &lt;code>ResponseModel&lt;/code>.&lt;/p>
 &lt;h2 id="a-basic-get">A basic GET&lt;/h2>
 &lt;p>First, we get a &lt;code>HttpResponseMessage&lt;/code> from the client by making a request.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">HttpResponseMessage response = &lt;span style="color:#66d9ef">await&lt;/span> client.GetAsync(&lt;span style="color:#e6db74">&amp;#34;/&amp;#34;&lt;/span>);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then, we using the generic verion of the &lt;code>ReadAsAsync&amp;lt;T&amp;gt;&lt;/code> extension method to read and deserialize the JSON document into our object.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">Task&amp;lt;ResponseModel&amp;gt; responseModel = &lt;span style="color:#66d9ef">await&lt;/span> response.Content.ReadAsAsync&amp;lt;ResponseModel&amp;gt;();
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="a-post-with-a-request-document">A POST with a request document&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>HttpResponseMessage response = &lt;span style="color:#66d9ef">await&lt;/span> client.GetAsync(&lt;span style="color:#e6db74">&amp;#34;/&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then, we using the generic verion of the &lt;code>ReadAsAsync&amp;lt;T&amp;gt;&lt;/code> extension method to read and deserialize the JSON document into our object.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>Task&amp;lt;ResponseModel&amp;gt; responseModel = &lt;span style="color:#66d9ef">await&lt;/span> response.Content.ReadAsAsync&amp;lt;ResponseModel&amp;gt;();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="a-post-with-a-request-document">A POST with a request document&lt;/h2>
 &lt;p>Sending a document is also pretty straightforward.&lt;/p>
 &lt;p>First, we initialize our request model.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">RequestModel requestModel = &lt;span style="color:#66d9ef">new&lt;/span> RequestModel();
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then, we make our request, including our model that will get serialized through the &lt;code>PostAsJsonAsync&lt;/code> extension method.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">HttpResponseMessage response = &lt;span style="color:#66d9ef">await&lt;/span> client.PostAsJsonAsync(&lt;span style="color:#e6db74">&amp;#34;/&amp;#34;&lt;/span>, requestModel);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Finally, we read the response model, just like we did for the GET.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">ResponseModel responseModel = &lt;span style="color:#66d9ef">await&lt;/span> response.Content.ReadAsAsync&amp;lt;ResponseModel&amp;gt;();
-&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="systemnethttpjson">System.Net.Http.Json&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>RequestModel requestModel = &lt;span style="color:#66d9ef">new&lt;/span> RequestModel();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then, we make our request, including our model that will get serialized through the &lt;code>PostAsJsonAsync&lt;/code> extension method.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>HttpResponseMessage response = &lt;span style="color:#66d9ef">await&lt;/span> client.PostAsJsonAsync(&lt;span style="color:#e6db74">&amp;#34;/&amp;#34;&lt;/span>, requestModel);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Finally, we read the response model, just like we did for the GET.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>ResponseModel responseModel = &lt;span style="color:#66d9ef">await&lt;/span> response.Content.ReadAsAsync&amp;lt;ResponseModel&amp;gt;();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="systemnethttpjson">System.Net.Http.Json&lt;/h1>
 &lt;p>Here, we&amp;rsquo;ll be doing the same exact thing, but using the extension methods in &lt;code>System.Net.Http.Json&lt;/code> instead.&lt;/p>
 &lt;h2 id="a-basic-get-1">A basic GET&lt;/h2>
 &lt;p>Again, we get a &lt;code>HttpResponseMessage&lt;/code> from the client by making a request. This is the same as for &lt;code>Microsoft.AspNet.WebApi.Client&lt;/code>.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">HttpResponseMessage response = &lt;span style="color:#66d9ef">await&lt;/span> client.GetAsync(&lt;span style="color:#e6db74">&amp;#34;/&amp;#34;&lt;/span>);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then, we using the generic verion of the &lt;code>ReadFromJsonAsync&amp;lt;T&amp;gt;&lt;/code> extension method to read and serialize the JSON document into our object.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">ResponseModel responseModel = &lt;span style="color:#66d9ef">await&lt;/span> response.Content.ReadFromJsonAsync&amp;lt;ResponseModel&amp;gt;();
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note that if you don&amp;rsquo;t need to do any processing on the &lt;code>HttpResponseMessage&lt;/code>, there&amp;rsquo;s also a convenience method called &lt;code>GetFromJsonAsync&lt;/code> so you can skip that step entirely.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">ResponseModel responseModel = &lt;span style="color:#66d9ef">await&lt;/span> client.GetFromJsonAsync&amp;lt;ResponseModel&amp;gt;(&lt;span style="color:#e6db74">&amp;#34;/&amp;#34;&lt;/span>);
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="a-post-with-a-request-document-1">A POST with a request document&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>HttpResponseMessage response = &lt;span style="color:#66d9ef">await&lt;/span> client.GetAsync(&lt;span style="color:#e6db74">&amp;#34;/&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then, we using the generic verion of the &lt;code>ReadFromJsonAsync&amp;lt;T&amp;gt;&lt;/code> extension method to read and serialize the JSON document into our object.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>ResponseModel responseModel = &lt;span style="color:#66d9ef">await&lt;/span> response.Content.ReadFromJsonAsync&amp;lt;ResponseModel&amp;gt;();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note that if you don&amp;rsquo;t need to do any processing on the &lt;code>HttpResponseMessage&lt;/code>, there&amp;rsquo;s also a convenience method called &lt;code>GetFromJsonAsync&lt;/code> so you can skip that step entirely.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>ResponseModel responseModel = &lt;span style="color:#66d9ef">await&lt;/span> client.GetFromJsonAsync&amp;lt;ResponseModel&amp;gt;(&lt;span style="color:#e6db74">&amp;#34;/&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="a-post-with-a-request-document-1">A POST with a request document&lt;/h2>
 &lt;p>Sending a document is also pretty straightforward.&lt;/p>
 &lt;p>First, we initialize our request model.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">RequestModel requestModel = &lt;span style="color:#66d9ef">new&lt;/span> RequestModel();
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then, we make our request, including our model that will get serialized through the &lt;code>PostAsJsonAsync&lt;/code> extension method, which conveniently has the same name as the extension method from &lt;code>Microsoft.AspNet.WebApi.Client&lt;/code>.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">HttpResponseMessage response = &lt;span style="color:#66d9ef">await&lt;/span> client.PostAsJsonAsync(&lt;span style="color:#e6db74">&amp;#34;/&amp;#34;&lt;/span>, requestModel);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Finally, we read the response model, just like we did for the GET.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">ResponseModel responseModel = &lt;span style="color:#66d9ef">await&lt;/span> response.Content.ReadFromJsonAsync&amp;lt;ResponseModel&amp;gt;();
-&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="final-notes">Final notes&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>RequestModel requestModel = &lt;span style="color:#66d9ef">new&lt;/span> RequestModel();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then, we make our request, including our model that will get serialized through the &lt;code>PostAsJsonAsync&lt;/code> extension method, which conveniently has the same name as the extension method from &lt;code>Microsoft.AspNet.WebApi.Client&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>HttpResponseMessage response = &lt;span style="color:#66d9ef">await&lt;/span> client.PostAsJsonAsync(&lt;span style="color:#e6db74">&amp;#34;/&amp;#34;&lt;/span>, requestModel);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Finally, we read the response model, just like we did for the GET.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>ResponseModel responseModel = &lt;span style="color:#66d9ef">await&lt;/span> response.Content.ReadFromJsonAsync&amp;lt;ResponseModel&amp;gt;();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="final-notes">Final notes&lt;/h1>
 &lt;p>While serializing and deserializing documents with the &lt;code>HttpClient&lt;/code> isn&amp;rsquo;t particularly challenging, it does lead to a fair amount of repetition, so using these extension methods (or rolling your own!) should make your code look a lot leaner.&lt;/p></description><category>.net</category></item><item><title>Thoughts on Job Titles</title><link>https://esg.dev/posts/thoughts-on-job-titles/</link><pubDate>Sat, 24 Oct 2020 20:15:26 -0400</pubDate><guid>https://esg.dev/posts/thoughts-on-job-titles/</guid><description>&lt;p>Job titles are funny thing. Their meanings vary so wildly that they should hold no importance at all. For example, I&amp;rsquo;ve seen postings for &amp;ldquo;Senior software developer&amp;rdquo; where the amount of required experience varied from 5 to over 10 years of experience. That&amp;rsquo;s a pretty big gap!&lt;/p>
 &lt;p>Yet, having a title that doesn&amp;rsquo;t match your responsibilities can hurt your career in significant ways, because the chances of someone being hired for a position that has a title they never held is pretty slim! You might even get rejected by automation without humans ever seeing your resume&amp;hellip;&lt;/p>
 &lt;h1 id="do-titles-matter">Do titles matter?&lt;/h1>
@@ -172,7 +172,7 @@ With Editorconfig, you have a standard way that&amp;rsquo;s not tied to specific
 &lt;h2 id="step-1-organization">Step 1: Organization&lt;/h2>
 &lt;p>In order to save yourself some headaches, it&amp;rsquo;s better to plan ahead how you want the final repository layout to be. You&amp;rsquo;ll also want to move files around to avoid any conflicts.&lt;/p>
 &lt;p>For simplicity, I want the end result to be:&lt;/p>
-&lt;pre>&lt;code>src/A
+&lt;pre tabindex="0">&lt;code>src/A
 src/B
 &lt;/code>&lt;/pre>&lt;p>In the &lt;code>A&lt;/code> repository, using whatever tools you want, create the &lt;code>src/A&lt;/code> directory and move everything in there.&lt;/p>
 &lt;p>After that, execute &lt;code>git add -A&lt;/code> to update the index and make sure you &lt;code>git commit&lt;/code>.&lt;/p>
@@ -184,7 +184,7 @@ src/B
 &lt;p>Once that&amp;rsquo;s done, check the content of your repository and your &lt;code>git log&lt;/code> to make sure that everything is good, and then you are done!&lt;/p>
 &lt;h1 id="splitting">Splitting&lt;/h1>
 &lt;p>In this scenario, we&amp;rsquo;ll be reverting the changes we&amp;rsquo;ve done above, going from 1 repository containing:&lt;/p>
-&lt;pre>&lt;code>src/A
+&lt;pre tabindex="0">&lt;code>src/A
 src/B
 &lt;/code>&lt;/pre>&lt;p>and split them back into 2 repositories, with the content at the root of each ones.&lt;/p>
 &lt;h2 id="danger-will-robinson">Danger Will Robinson&lt;/h2>
@@ -206,111 +206,112 @@ src/B
 &lt;h2 id="templating">Templating&lt;/h2>
 &lt;p>One thing to keep in mind is that when writing an event to the log, you are not passing a message, but a &lt;em>template&lt;/em>. The tags you pass within curly branches do have meaning, and will be used to add data the event. It is therefore important to not format the message before passing logging it.&lt;/p>
 &lt;p>Consider a logger with a basic console sink&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">var&lt;/span> textLogger = Log.Logger = &lt;span style="color:#66d9ef">new&lt;/span> LoggerConfiguration()
-.WriteTo.Console()
-.CreateLogger();
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>With two very basic statements&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">textLogger.Information(&lt;span style="color:#e6db74">$&amp;#34;Hello {world}&amp;#34;&lt;/span>);
-textLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp;#34;&lt;/span>, world);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Will output:&lt;/p>
-&lt;pre>&lt;code>[18:19:18 INF] Hello World
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> textLogger = Log.Logger = &lt;span style="color:#66d9ef">new&lt;/span> LoggerConfiguration()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .WriteTo.Console()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .CreateLogger();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>With two very basic statements&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>textLogger.Information(&lt;span style="color:#e6db74">$&amp;#34;Hello {world}&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>textLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp;#34;&lt;/span>, world);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Will output:&lt;/p>
+&lt;pre tabindex="0">&lt;code>[18:19:18 INF] Hello World
 [18:19:18 INF] Hello World
 &lt;/code>&lt;/pre>&lt;p>Can you spot the difference? Spoiler: There isn&amp;rsquo;t one! So what&amp;rsquo;s the problem then?&lt;/p>
 &lt;p>Well, let&amp;rsquo;s use the &lt;a href="https://github.com/serilog/serilog-formatting-compact">JSON Formatter&lt;/a> instead:&lt;/p>
 &lt;p>(note: I&amp;rsquo;m using the &lt;a href="https://github.com/serilog/serilog-formatting-compact#rendered-events">Rendered&lt;/a> formatter so we can see the rendered template within each event)&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">var&lt;/span> jsonLogger = Log.Logger = &lt;span style="color:#66d9ef">new&lt;/span> LoggerConfiguration()
-.WriteTo.Console(&lt;span style="color:#66d9ef">new&lt;/span> RenderedCompactJsonFormatter())
-.CreateLogger();
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>With the same statements&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">jsonLogger.Information(&lt;span style="color:#e6db74">$&amp;#34;Hello {world}&amp;#34;&lt;/span>);
-jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp;#34;&lt;/span>, world);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Will give us:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:26:19.6616913Z&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Hello World&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;00ba5a14&amp;#34;&lt;/span>
-}
-{
-&lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:26:19.6659300Z&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Hello \&amp;#34;World\&amp;#34;&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;40c34e37&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;value&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;World&amp;#34;&lt;/span>
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>When using &lt;code>textLogger.Information(&amp;quot;Hello {value}&amp;quot;, world)&lt;/code>, there is now a field called &lt;code>value&lt;/code> with the argument we passed to the logging statements.
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> jsonLogger = Log.Logger = &lt;span style="color:#66d9ef">new&lt;/span> LoggerConfiguration()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .WriteTo.Console(&lt;span style="color:#66d9ef">new&lt;/span> RenderedCompactJsonFormatter())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .CreateLogger();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>With the same statements&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>jsonLogger.Information(&lt;span style="color:#e6db74">$&amp;#34;Hello {world}&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp;#34;&lt;/span>, world);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Will give us:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:26:19.6616913Z&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Hello World&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;00ba5a14&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:26:19.6659300Z&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Hello \&amp;#34;World\&amp;#34;&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;40c34e37&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;value&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;World&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>When using &lt;code>textLogger.Information(&amp;quot;Hello {value}&amp;quot;, world)&lt;/code>, there is now a field called &lt;code>value&lt;/code> with the argument we passed to the logging statements.
 In addition, the &lt;code>@i&lt;/code> field will have the same value every time this statement will run, so you have a fixed item to search for if you want to search for every value being logged by this particular statement.&lt;/p>
 &lt;h3 id="tldr">TLDR&lt;/h3>
 &lt;p>&lt;strong>DON&amp;rsquo;T&lt;/strong> format messages before passing them to the logger&lt;/p>
 &lt;h2 id="destructuring">Destructuring&lt;/h2>
 &lt;p>One of the benefit of having a structured logger versus a flat one, is, well, &lt;em>structure&lt;/em>. You are not limited to logging simple values, you can include entire object graphs. This process is called &lt;em>Destructuring&lt;/em>.&lt;/p>
 &lt;p>Let&amp;rsquo;s consider the following classes&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">TestInnerClass&lt;/span>
-{
-&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> SomeOtherProperty { &lt;span style="color:#66d9ef">get&lt;/span>; &lt;span style="color:#66d9ef">set&lt;/span>; }
-}
-&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">TestClass&lt;/span>
-{
-&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> SomeProperty { &lt;span style="color:#66d9ef">get&lt;/span>; &lt;span style="color:#66d9ef">set&lt;/span>; }
-&lt;span style="color:#66d9ef">public&lt;/span> TestInnerClass SomeInnerClass { &lt;span style="color:#66d9ef">get&lt;/span>; &lt;span style="color:#66d9ef">set&lt;/span>; }
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Let&amp;rsquo;s initialize an instance&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">var&lt;/span> obj = &lt;span style="color:#66d9ef">new&lt;/span> TestClass
-{
-SomeInnerClass = &lt;span style="color:#66d9ef">new&lt;/span> TestInnerClass
-{
-SomeOtherProperty = &lt;span style="color:#e6db74">&amp;#34;I am a property within a child&amp;#34;&lt;/span>
-},
-SomeProperty = &lt;span style="color:#e6db74">&amp;#34;I am a property at the root level&amp;#34;&lt;/span>
-};
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>And let&amp;rsquo;s include it a logging statement&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Useful log for object {object}&amp;#34;&lt;/span>, obj);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>This will output&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:43:28.1191964Z&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Useful log for object \&amp;#34;SerilogTest.TestClass\&amp;#34;&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;146d94ee&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;object&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;SerilogTest.TestClass&amp;#34;&lt;/span>
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>What? &lt;code>SerilogTest.TestClass&lt;/code>? By default, Serilog will simply call &lt;code>ToString&lt;/code> on your object. To destructure it, simply add &lt;code>a&lt;/code> before the field in your template&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Useful log for object {@object}&amp;#34;&lt;/span>, obj);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>And the output will be&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:43:28.1525906Z&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Useful log for object TestClass { SomeProperty: \&amp;#34;I am a property at the root level\&amp;#34;, SomeInnerClass: TestInnerClass { SomeOtherProperty: \&amp;#34;I am a property within a child\&amp;#34; } }&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;99aea052&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;object&amp;#34;&lt;/span>: {
-&lt;span style="color:#f92672">&amp;#34;SomeProperty&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;I am a property at the root level&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;SomeInnerClass&amp;#34;&lt;/span>: {
-&lt;span style="color:#f92672">&amp;#34;SomeOtherProperty&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;I am a property within a child&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;$type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;TestInnerClass&amp;#34;&lt;/span>
-},
-&lt;span style="color:#f92672">&amp;#34;$type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;TestClass&amp;#34;&lt;/span>
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>As you can see, the entire object graph was included within the event. So much contextual information!&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">TestInnerClass&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> SomeOtherProperty { &lt;span style="color:#66d9ef">get&lt;/span>; &lt;span style="color:#66d9ef">set&lt;/span>; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">TestClass&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> SomeProperty { &lt;span style="color:#66d9ef">get&lt;/span>; &lt;span style="color:#66d9ef">set&lt;/span>; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> TestInnerClass SomeInnerClass { &lt;span style="color:#66d9ef">get&lt;/span>; &lt;span style="color:#66d9ef">set&lt;/span>; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Let&amp;rsquo;s initialize an instance&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> obj = &lt;span style="color:#66d9ef">new&lt;/span> TestClass
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> SomeInnerClass = &lt;span style="color:#66d9ef">new&lt;/span> TestInnerClass
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> SomeOtherProperty = &lt;span style="color:#e6db74">&amp;#34;I am a property within a child&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> SomeProperty = &lt;span style="color:#e6db74">&amp;#34;I am a property at the root level&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>};
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>And let&amp;rsquo;s include it a logging statement&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Useful log for object {object}&amp;#34;&lt;/span>, obj);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This will output&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:43:28.1191964Z&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Useful log for object \&amp;#34;SerilogTest.TestClass\&amp;#34;&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;146d94ee&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;object&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;SerilogTest.TestClass&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>What? &lt;code>SerilogTest.TestClass&lt;/code>? By default, Serilog will simply call &lt;code>ToString&lt;/code> on your object. To destructure it, simply add &lt;code>a&lt;/code> before the field in your template&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Useful log for object {@object}&amp;#34;&lt;/span>, obj);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>And the output will be&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:43:28.1525906Z&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Useful log for object TestClass { SomeProperty: \&amp;#34;I am a property at the root level\&amp;#34;, SomeInnerClass: TestInnerClass { SomeOtherProperty: \&amp;#34;I am a property within a child\&amp;#34; } }&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;99aea052&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;object&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;SomeProperty&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;I am a property at the root level&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;SomeInnerClass&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;SomeOtherProperty&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;I am a property within a child&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;$type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;TestInnerClass&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;$type&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;TestClass&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>As you can see, the entire object graph was included within the event. So much contextual information!&lt;/p>
 &lt;p>But what if there are properties that you do not want to log? After all, it&amp;rsquo;s typically frowned upon to include information like passwords or personally identifiable information within them.&lt;/p>
 &lt;p>Let&amp;rsquo;s reconfigure the logger to only log &lt;code>SomeProperty&lt;/code>:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">var&lt;/span> jsonLogger = Log.Logger = &lt;span style="color:#66d9ef">new&lt;/span> LoggerConfiguration()
-.WriteTo.Console(&lt;span style="color:#66d9ef">new&lt;/span> RenderedCompactJsonFormatter())
-.Destructure.ByTransforming&amp;lt;TestClass&amp;gt;(c =&amp;gt; &lt;span style="color:#66d9ef">new&lt;/span> { c.SomeProperty })
-.CreateLogger();
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Will give us&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:49:44.7386801Z&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Useful log for object { SomeProperty: \&amp;#34;I am a property at the root level\&amp;#34; }&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;99aea052&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;object&amp;#34;&lt;/span>: {
-&lt;span style="color:#f92672">&amp;#34;SomeProperty&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;I am a property at the root level&amp;#34;&lt;/span>
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>We only included the property we wanted!&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> jsonLogger = Log.Logger = &lt;span style="color:#66d9ef">new&lt;/span> LoggerConfiguration()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .WriteTo.Console(&lt;span style="color:#66d9ef">new&lt;/span> RenderedCompactJsonFormatter())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .Destructure.ByTransforming&amp;lt;TestClass&amp;gt;(c =&amp;gt; &lt;span style="color:#66d9ef">new&lt;/span> { c.SomeProperty })
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .CreateLogger();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Will give us&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T22:49:44.7386801Z&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Useful log for object { SomeProperty: \&amp;#34;I am a property at the root level\&amp;#34; }&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;99aea052&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;object&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;SomeProperty&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;I am a property at the root level&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>We only included the property we wanted!&lt;/p>
 &lt;p>Note that there are different ways to configure destructuring. A good start in the (awesomely named) &lt;a href="https://github.com/destructurama">Destructurama!&lt;/a> organization.&lt;/p>
 &lt;h3 id="type-conflicts">Type conflicts&lt;/h3>
 &lt;p>Just a side note about destructing objects regarding conflicting types. Some log aggregating services will use the parameter names within templates to define types.&lt;/p>
 &lt;p>An example of this is Elasticsearch.&lt;/p>
 &lt;p>With the following statement&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;world&amp;#34;&lt;/span>);
-jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">new&lt;/span> { &lt;span style="color:#66d9ef">value&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;world&amp;#34;&lt;/span> });
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Since the first statement will generate a string field called &amp;ldquo;value&amp;rdquo; in the mapping, the second statement will not be logged, as Elasticsearch will complain about trying to fit an object within a string field.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;world&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">new&lt;/span> { &lt;span style="color:#66d9ef">value&lt;/span> = &lt;span style="color:#e6db74">&amp;#34;world&amp;#34;&lt;/span> });
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Since the first statement will generate a string field called &amp;ldquo;value&amp;rdquo; in the mapping, the second statement will not be logged, as Elasticsearch will complain about trying to fit an object within a string field.&lt;/p>
 &lt;h3 id="tldr-1">TLDR&lt;/h3>
 &lt;p>&lt;strong>DO&lt;/strong> include object graph when they add contextual information to your statements
 &lt;strong>AVOID&lt;/strong> including unnecessary objects. They can clutter your logs, and if you&amp;rsquo;re pushing them to external services that charges by the size of logs you send them, it will quite literally cost you.
@@ -318,26 +319,26 @@ jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Hello {value}&amp
 &lt;h2 id="exceptions">Exceptions&lt;/h2>
 &lt;p>The one thing to remember is that Serilog&amp;rsquo;s methods all have an overload that accepts an &lt;code>Exception&lt;/code> as the first parameter.&lt;/p>
 &lt;p>So instead of writing statements including the exception as part of the message template&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">var&lt;/span> exception = &lt;span style="color:#66d9ef">new&lt;/span> Exception(&lt;span style="color:#e6db74">&amp;#34;Top exception&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">new&lt;/span> Exception(&lt;span style="color:#e6db74">&amp;#34;Inner exception&amp;#34;&lt;/span>));
-jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Exception! {exception}&amp;#34;&lt;/span>, exception);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Which will include the exception within the &lt;code>exception&lt;/code> parameter&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T23:01:14.1165769Z&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Exception! \&amp;#34;System.Exception: Top exception\r\n ---&amp;gt; System.Exception: Inner exception\r\n --- End of inner exception stack trace ---\&amp;#34;&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;e22b2a9a&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;exception&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;System.Exception: Top exception\r\n ---&amp;gt; System.Exception: Inner exception\r\n --- End of inner exception stack trace ---&amp;#34;&lt;/span>
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Simply include the exception as the first argument&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">var&lt;/span> exception = &lt;span style="color:#66d9ef">new&lt;/span> Exception(&lt;span style="color:#e6db74">&amp;#34;Top exception&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">new&lt;/span> Exception(&lt;span style="color:#e6db74">&amp;#34;Inner exception&amp;#34;&lt;/span>));
-jsonLogger.Information(exception, &lt;span style="color:#e6db74">&amp;#34;Exception&amp;#34;&lt;/span>);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>And now all logged exceptions will be within the &lt;code>@x&lt;/code> field.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T23:01:14.1532597Z&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Exception&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;7d53da39&amp;#34;&lt;/span>,
-&lt;span style="color:#f92672">&amp;#34;@x&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;System.Exception: Top exception\r\n ---&amp;gt; System.Exception: Inner exception\r\n --- End of inner exception stack trace ---&amp;#34;&lt;/span>
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note that this behaviour can change depending on your sink. For example, the &lt;a href="https://github.com/serilog/serilog-sinks-elasticsearch">Elasticsearch sink&lt;/a> will include the exceptions within an object array.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> exception = &lt;span style="color:#66d9ef">new&lt;/span> Exception(&lt;span style="color:#e6db74">&amp;#34;Top exception&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">new&lt;/span> Exception(&lt;span style="color:#e6db74">&amp;#34;Inner exception&amp;#34;&lt;/span>));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jsonLogger.Information(&lt;span style="color:#e6db74">&amp;#34;Exception! {exception}&amp;#34;&lt;/span>, exception);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Which will include the exception within the &lt;code>exception&lt;/code> parameter&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T23:01:14.1165769Z&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Exception! \&amp;#34;System.Exception: Top exception\r\n ---&amp;gt; System.Exception: Inner exception\r\n --- End of inner exception stack trace ---\&amp;#34;&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;e22b2a9a&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;exception&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;System.Exception: Top exception\r\n ---&amp;gt; System.Exception: Inner exception\r\n --- End of inner exception stack trace ---&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Simply include the exception as the first argument&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> exception = &lt;span style="color:#66d9ef">new&lt;/span> Exception(&lt;span style="color:#e6db74">&amp;#34;Top exception&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">new&lt;/span> Exception(&lt;span style="color:#e6db74">&amp;#34;Inner exception&amp;#34;&lt;/span>));
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jsonLogger.Information(exception, &lt;span style="color:#e6db74">&amp;#34;Exception&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>And now all logged exceptions will be within the &lt;code>@x&lt;/code> field.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@t&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2020-07-12T23:01:14.1532597Z&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@m&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;Exception&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@i&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;7d53da39&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;#34;@x&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;System.Exception: Top exception\r\n ---&amp;gt; System.Exception: Inner exception\r\n --- End of inner exception stack trace ---&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note that this behaviour can change depending on your sink. For example, the &lt;a href="https://github.com/serilog/serilog-sinks-elasticsearch">Elasticsearch sink&lt;/a> will include the exceptions within an object array.&lt;/p>
 &lt;h3 id="tldr-2">TLDR&lt;/h3>
 &lt;p>&lt;strong>DO&lt;/strong> use Serilog&amp;rsquo;s overloads to pass exceptions instead of using the argument list.&lt;/p>
 &lt;h2 id="conclusion">Conclusion&lt;/h2>
@@ -353,34 +354,34 @@ jsonLogger.Information(exception, &lt;span style="color:#e6db74">&amp;#34;Except
 &lt;p>You will need access to a Linux machine as there is no version of certbot available for Windows yet. In my case, I used Ubuntu on top for WSL, and I based the commands off the &lt;a href="https://certbot.eff.org/lets-encrypt/ubuntubionic-apache.html">Ubuntu documentation page&lt;/a> for certbot.&lt;/p>
 &lt;h2 id="install-certbot">Install certbot&lt;/h2>
 &lt;p>We&amp;rsquo;ll need to add the certbot PPA:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo apt-get update
-sudo apt-get install software-properties-common
-sudo add-apt-repository universe
-sudo add-apt-repository ppa:certbot/certbot
-sudo apt-get update
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>and then install certbot itself&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo apt-get install certbot
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="generate-the-certificate">Generate the certificate&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt-get update
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get install software-properties-common
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo add-apt-repository universe
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo add-apt-repository ppa:certbot/certbot
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get update
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>and then install certbot itself&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt-get install certbot
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="generate-the-certificate">Generate the certificate&lt;/h2>
 &lt;p>Now we can use certbot to generate a new certificate in &lt;a href="https://certbot.eff.org/docs/using.html#manual">manual mode&lt;/a>.&lt;/p>
 &lt;p>Note: It&amp;rsquo;s possible to run certbot without sudo, see &lt;a href="https://certbot.eff.org/faq/#does-certbot-require-root-administrator-privileges">https://certbot.eff.org/faq/#does-certbot-require-root-administrator-privileges&lt;/a> for more information.&lt;/p>
 &lt;p>While Let&amp;rsquo;s Encrypt supports wildcard certificates (ex: &lt;code>*.esg.dev&lt;/code>), I only need &lt;code>www.esg.dev&lt;/code> and &lt;code>esg.dev&lt;/code>, so I&amp;rsquo;ll be specifying those via the &lt;code>-d&lt;/code> (domain) switch.&lt;/p>
 &lt;p>We&amp;rsquo;ll also be using the DNS validation method, which involves adding TXT records to your DNS zone, specifically one for each domain within the certificate.&lt;/p>
 &lt;p>Now we run the following to launch the certbot wizard.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo certbot certonly --cert-name esg.dev --manual -d esg.dev -d www.esg.dev --preferred-challenges dns
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Follow the instructions given by certbot.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo certbot certonly --cert-name esg.dev --manual -d esg.dev -d www.esg.dev --preferred-challenges dns
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Follow the instructions given by certbot.&lt;/p>
 &lt;p>For each of the domain specified, create the TXT record with the values generated by certbot in your DNS provider of choice. In my case, it was for &lt;code>_acme-challenge.esg.dev&lt;/code> and &lt;code>_acme-challenge.www.esg.dev&lt;/code>.&lt;/p>
 &lt;p>Certbot will verify those records. If the validation fails, you might need to re-start the generation process.&lt;/p>
 &lt;p>This will have generated pem files for your domain, in my case, under &lt;code>/etc/letsencrypt/live/esg.dev/&lt;/code>.&lt;/p>
 &lt;p>We still have one more step to take. Azure CDN didn&amp;rsquo;t like it when I tried to use the pem files, so let&amp;rsquo;s convert those to pfx to make our life a bit easier. We can do this with &lt;a href="https://www.openssl.org/">OpenSSL&lt;/a>:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo pkcs12 -export -inkey /etc/letsencrypt/live/esg.dev/privkey.pem -in /etc/letsencrypt/live/esg.dev/fullchain.pem -name esg-dev -out esg.pfx
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>This will prompt you for a password, enter whatever you feel is appropriate.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo pkcs12 -export -inkey /etc/letsencrypt/live/esg.dev/privkey.pem -in /etc/letsencrypt/live/esg.dev/fullchain.pem -name esg-dev -out esg.pfx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This will prompt you for a password, enter whatever you feel is appropriate.&lt;/p>
 &lt;p>you now can upload the generated pfx file to an Azure key vault, which will allow you to configure Azure CDN with a custom certificate.&lt;/p>
 &lt;h2 id="renewing-the-certificate">Renewing the certificate&lt;/h2>
 &lt;p>Let&amp;rsquo;s Encrypt certificates have an expiry of 90 days.&lt;/p>
 &lt;p>To renew the certificate, it&amp;rsquo;s important to remember that certbot&amp;rsquo;s &lt;code>renew&lt;/code> command is meant for non-interactive usage, and won&amp;rsquo;t work out of the box with the manual plugin.&lt;/p>
 &lt;p>But all we need to do is re-run the &lt;em>same exact command&lt;/em> as we did the first time:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-bash" data-lang="bash">sudo certbot certonly --cert-name esg.dev --manual -d esg.dev -d www.esg.dev --preferred-challenges dns
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>And then convert/upload the new certificate to your vault. You&amp;rsquo;ll also need to update your custom domains in Azure CDN to use the newer version of the certificate.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo certbot certonly --cert-name esg.dev --manual -d esg.dev -d www.esg.dev --preferred-challenges dns
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>And then convert/upload the new certificate to your vault. You&amp;rsquo;ll also need to update your custom domains in Azure CDN to use the newer version of the certificate.&lt;/p>
 &lt;h2 id="next-steps">Next steps&lt;/h2>
 &lt;p>There are a few solutions out there to do this, but I&amp;rsquo;ve had had no real luck getting them working, and I wanted to understand the process by doing it manually first anyway.&lt;/p>
 &lt;p>I&amp;rsquo;ll be looking at automating this in the near future as I&amp;rsquo;ll probably forget to do this every 90 days, so stay tuned!&lt;/p></description><category>Azure</category><category>Let's Encrypt</category></item><item><title>Introduction to Action Constraints in ASP.NET Core</title><link>https://esg.dev/posts/introduction-to-action-constraints/</link><pubDate>Mon, 02 Dec 2019 18:45:08 -0500</pubDate><guid>https://esg.dev/posts/introduction-to-action-constraints/</guid><description>&lt;p>Ever had to integrate a 3rd party webhook into your application, only to realize that they won&amp;rsquo;t let you configure a different address for each type of events?&lt;/p>
@@ -394,46 +395,50 @@ sudo apt-get update
 &lt;li>&lt;code>Accept(ActionConstraintContext)&lt;/code>, which needs to return a boolean that will tell the framework whether to use this route&lt;/li>
 &lt;/ul>
 &lt;p>Let&amp;rsquo;s see what an implementation can look like:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">HeaderConstraintAttribute&lt;/span> : Attribute, IActionConstraint
-{
-&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span> Order =&amp;gt; &lt;span style="color:#ae81ff">0&lt;/span>;
-&lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> Header { &lt;span style="color:#66d9ef">get&lt;/span>; }
-&lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> Value { &lt;span style="color:#66d9ef">get&lt;/span>; }
-&lt;span style="color:#66d9ef">public&lt;/span> HeaderConstraintAttribute(&lt;span style="color:#66d9ef">string&lt;/span> header, &lt;span style="color:#66d9ef">string&lt;/span> &lt;span style="color:#66d9ef">value&lt;/span>)
-{
-Header = header;
-Value = &lt;span style="color:#66d9ef">value&lt;/span>;
-}
-&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">bool&lt;/span> Accept(ActionConstraintContext context)
-{
-&lt;span style="color:#66d9ef">if&lt;/span> (context.RouteContext.HttpContext.Request.Headers.TryGetValue(Header, &lt;span style="color:#66d9ef">out&lt;/span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#66d9ef">value&lt;/span>) &amp;amp;&amp;amp; &lt;span style="color:#66d9ef">value&lt;/span>.Any())
-{
-&lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">value&lt;/span>[&lt;span style="color:#ae81ff">0&lt;/span>] == Value;
-}
-&lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">false&lt;/span>;
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Simple enough, right? Look for a matching &lt;code>Header&lt;/code> in the &lt;code>HttpContext&lt;/code>, and if present, match it with &lt;code>Value&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">HeaderConstraintAttribute&lt;/span> : Attribute, IActionConstraint
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span> Order =&amp;gt; &lt;span style="color:#ae81ff">0&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> Header { &lt;span style="color:#66d9ef">get&lt;/span>; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> Value { &lt;span style="color:#66d9ef">get&lt;/span>; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> HeaderConstraintAttribute(&lt;span style="color:#66d9ef">string&lt;/span> header, &lt;span style="color:#66d9ef">string&lt;/span> &lt;span style="color:#66d9ef">value&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Header = header;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Value = &lt;span style="color:#66d9ef">value&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">bool&lt;/span> Accept(ActionConstraintContext context)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">if&lt;/span> (context.RouteContext.HttpContext.Request.Headers.TryGetValue(Header, &lt;span style="color:#66d9ef">out&lt;/span> &lt;span style="color:#66d9ef">var&lt;/span> &lt;span style="color:#66d9ef">value&lt;/span>) &amp;amp;&amp;amp; &lt;span style="color:#66d9ef">value&lt;/span>.Any())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">value&lt;/span>[&lt;span style="color:#ae81ff">0&lt;/span>] == Value;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#66d9ef">false&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Simple enough, right? Look for a matching &lt;code>Header&lt;/code> in the &lt;code>HttpContext&lt;/code>, and if present, match it with &lt;code>Value&lt;/code>.&lt;/p>
 &lt;p>Now, let&amp;rsquo;s update our controller.&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#a6e22e">[Route(&amp;#34;api/[controller]&lt;/span>&lt;span style="color:#e6db74">&amp;#34;)]
-&lt;/span>&lt;span style="color:#e6db74">&lt;/span>&lt;span style="color:#a6e22e">[ApiController]&lt;/span>
-&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">ActionController&lt;/span> : ControllerBase
-{
-&lt;span style="color:#a6e22e"> [HttpGet]&lt;/span>
-&lt;span style="color:#a6e22e"> [HeaderConstraint(&amp;#34;MyHeader&amp;#34;, &amp;#34;A&amp;#34;)]&lt;/span>
-&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> GetStringA()
-{
-&lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;A&amp;#34;&lt;/span>;
-}
-&lt;span style="color:#a6e22e">
-&lt;/span>&lt;span style="color:#a6e22e"> [HttpGet]&lt;/span>
-&lt;span style="color:#a6e22e"> [HeaderConstraint(&amp;#34;MyHeader&amp;#34;, &amp;#34;B&amp;#34;)]&lt;/span>
-&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> GetStringB()
-{
-&lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;B&amp;#34;&lt;/span>;
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>There are 2 things to notice here:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">[Route(&amp;#34;api/[controller]&lt;/span>&lt;span style="color:#e6db74">&amp;#34;)]
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74">&lt;/span>&lt;span style="color:#a6e22e">[ApiController]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">ActionController&lt;/span> : ControllerBase
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e"> [HttpGet]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e"> [HeaderConstraint(&amp;#34;MyHeader&amp;#34;, &amp;#34;A&amp;#34;)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> GetStringA()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;A&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e"> [HttpGet]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e"> [HeaderConstraint(&amp;#34;MyHeader&amp;#34;, &amp;#34;B&amp;#34;)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">string&lt;/span> GetStringB()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#34;B&amp;#34;&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>There are 2 things to notice here:&lt;/p>
 &lt;ul>
 &lt;li>Both functions are HTTP Get, to the same route (&lt;code>/api/action&lt;/code> in this case)&lt;/li>
 &lt;li>We&amp;rsquo;ve added the &lt;code>HeaderConstraintAttribute&lt;/code> on each route&lt;/li>
@@ -463,11 +468,11 @@ Value = &lt;span style="color:#66d9ef">value&lt;/span>;
 &lt;p>Terraform allows to store the state in share space, such as S3 buckets. Note that there&amp;rsquo;s a new-ish offering &lt;a href="https://www.terraform.io/docs/cloud/index.html">Terraform Cloud&lt;/a> which will allow you to not only store the state, but manage your configuration and provisioning, but that&amp;rsquo;s a story for another time&amp;hellip;&lt;/p>
 &lt;p>I decided to use S3 to host the state since I was planning to host the site on AWS anyway. All I had to do was create a new S3 bucket in my AWS account and modify my Terraform configuration to include a &lt;code>backend&lt;/code> section.&lt;/p>
 &lt;p>Here&amp;rsquo;s how it looks:&lt;/p>
-&lt;div class="highlight">&lt;pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">&lt;code class="language-HCL" data-lang="HCL">&lt;span style="color:#66d9ef">terraform&lt;/span> {
-&lt;span style="color:#66d9ef">backend&lt;/span> &lt;span style="color:#e6db74">&amp;#34;s3&amp;#34;&lt;/span> {
-bucket &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;blog-terraform-state&amp;#34;&lt;/span>&lt;span style="color:#75715e"> # The name of the bucket to use
-&lt;/span>&lt;span style="color:#75715e">&lt;/span> key &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;terraform.tfstate&amp;#34;&lt;/span>&lt;span style="color:#75715e"> # The name of the file within the bucket
-&lt;/span>&lt;span style="color:#75715e">&lt;/span> region &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;us-east-1&amp;#34;&lt;/span>&lt;span style="color:#75715e"> # The AWS region to store the bucket in
-&lt;/span>&lt;span style="color:#75715e">&lt;/span> }
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once I had the backend properly configured, it didn&amp;rsquo;t matter if I applied the configuration locally or if I did through a remote pipeline. They all shared the same state, and this lived in harmony forever and ever.&lt;/p></description><category>Terraform</category></item></channel></rss>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-HCL" data-lang="HCL">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">terraform&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">backend&lt;/span> &lt;span style="color:#e6db74">&amp;#34;s3&amp;#34;&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> bucket &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;blog-terraform-state&amp;#34;&lt;/span>&lt;span style="color:#75715e"> # The name of the bucket to use
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> key &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;terraform.tfstate&amp;#34;&lt;/span>&lt;span style="color:#75715e"> # The name of the file within the bucket
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> region &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#e6db74">&amp;#34;us-east-1&amp;#34;&lt;/span>&lt;span style="color:#75715e"> # The AWS region to store the bucket in
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once I had the backend properly configured, it didn&amp;rsquo;t matter if I applied the configuration locally or if I did through a remote pipeline. They all shared the same state, and this lived in harmony forever and ever.&lt;/p></description><category>Terraform</category></item></channel></rss>
