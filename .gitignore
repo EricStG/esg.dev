@@ -1,4 +1,5 @@
 src/hugo/public/
-.terraform
 *.backup
 *.tfstate
+*.lock
+.vscode
