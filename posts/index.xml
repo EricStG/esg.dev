@@ -1,4 +1,89 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on ESG's</title><link>https://esg.dev/posts/</link><description>Recent content in Posts on ESG's</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 26 Apr 2021 18:49:17 -0400</lastBuildDate><atom:link href="https://esg.dev/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Is the future of work remote?</title><link>https://esg.dev/posts/is-the-future-of-work-remote/</link><pubDate>Mon, 26 Apr 2021 18:49:17 -0400</pubDate><guid>https://esg.dev/posts/is-the-future-of-work-remote/</guid><description>&lt;p>Since the start of this great pandemic of ours, there&amp;rsquo;s been a lot of virtual ink spilled about companies doing a shift to fully remote or hybrid models. As I&amp;rsquo;ve been working mostly remote since 2018, I thought I&amp;rsquo;d chime in on the matter.&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on ESG's</title><link>https://esg.dev/posts/</link><description>Recent content in Posts on ESG's</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 17 Jul 2022 18:01:55 -0400</lastBuildDate><atom:link href="https://esg.dev/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Deferred processing in ASP.NET Core 6</title><link>https://esg.dev/posts/deferred-processing-in-aspnetcore/</link><pubDate>Sun, 17 Jul 2022 18:01:55 -0400</pubDate><guid>https://esg.dev/posts/deferred-processing-in-aspnetcore/</guid><description>&lt;p>Nowadays, a common pattern we see when treating HTTP requests is to do a minimal amount of work before returning a response, while treating longer operations (ex: sending email) in the background after the request has been completed.&lt;/p>
+&lt;p>Unfortunately, in ASP.NET, we often see this being done in questionable ways, mainly:&lt;/p>
+&lt;ul>
+&lt;li>Not using &lt;code>await&lt;/code> on &lt;code>Task&lt;/code> object&lt;/li>
+&lt;li>Wrapping some code in &lt;code>Task.Run&lt;/code> and not awaiting the results.&lt;/li>
+&lt;/ul>
+&lt;p>This can lead to dependency injection issues (if your request ends, all of our scoped objected are gone), or having exceptions thrown into the wind.&lt;/p>
+&lt;p>Fortunately, .NET has it&amp;rsquo;s own internal publisher/subscriber-like feature, called Channels.&lt;/p>
+&lt;h1 id="channels">Channels&lt;/h1>
+&lt;p>Channels were first introducted in .NET Core 3.0. While they&amp;rsquo;ve had a few improvements since, the abstract classes were mostly unchanged.&lt;/p>
+&lt;h2 id="the-basics">The basics&lt;/h2>
+&lt;p>A lot has been written about how to usage channels, so I won&amp;rsquo;t go in too deep here.&lt;/p>
+&lt;p>First, let&amp;rsquo;s go over the building blocks:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>Channel&lt;/code>: Static class used to create channels&lt;/li>
+&lt;li>&lt;code>Channel&amp;lt;T&amp;gt;&lt;/code>: Abstract class representing a channel&lt;/li>
+&lt;li>&lt;code>ChannelReader&amp;lt;T&amp;gt;&lt;/code> and &lt;code>ChannelWriter&amp;lt;T&amp;gt;&lt;/code>: Abstract classes representing readers and writers to a channel&lt;/li>
+&lt;/ul>
+&lt;p>A simple setup would be:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> channel = Channel.CreateUnbounded&amp;lt;Model&amp;gt;();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> reader = channel.Reader;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">var&lt;/span> writer = channel.Writer;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="integration-with-aspnet-core">Integration with ASP.NET Core&lt;/h1>
+&lt;p>We&amp;rsquo;ll be assuming that we want to process a model named, appropriately, &lt;code>Model&lt;/code>.&lt;/p>
+&lt;h2 id="background-service">Background service&lt;/h2>
+&lt;p>First, let&amp;rsquo;s created a &lt;a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-6.0&amp;amp;tabs=visual-studio">HostedService&lt;/a> to receive the messages.&lt;/p>
+&lt;p>We&amp;rsquo;ll be inheriting from &lt;code>BackgroundService&lt;/code> since it makes the implementation a little simpler.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">ModelService&lt;/span> : BackgroundService
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">readonly&lt;/span> ChannelReader&amp;lt;Model&amp;gt; _channelReader;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">private&lt;/span> &lt;span style="color:#66d9ef">readonly&lt;/span> ILogger&amp;lt;Service&amp;gt; _logger;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> ModelService(ChannelReader&amp;lt;Model&amp;gt; channelReader, ILogger&amp;lt;Service&amp;gt; logger)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _channelReader = channelReader;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _logger = logger;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">protected&lt;/span> &lt;span style="color:#66d9ef">override&lt;/span> &lt;span style="color:#66d9ef">async&lt;/span> Task ExecuteAsync(CancellationToken stoppingToken)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> (&lt;span style="color:#66d9ef">await&lt;/span> _channelReader.WaitToReadAsync(stoppingToken))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">while&lt;/span> (_channelReader.TryRead(&lt;span style="color:#66d9ef">out&lt;/span> &lt;span style="color:#66d9ef">var&lt;/span> item))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _logger.LogInformation(&lt;span style="color:#e6db74">&amp;#34;Message is `{Message}`&amp;#34;&lt;/span>, item.Message);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Pretty simple, right?&lt;/p>
+&lt;p>We pass a &lt;code>ChannelReader&amp;lt;Model&amp;gt;&lt;/code> to the constructor&lt;/p>
+&lt;p>In the first &lt;code>while&lt;/code>, we wait for a message to be available in the channel. When there&amp;rsquo;s one, we enter the second while to read every messages available until exiting.&lt;/p>
+&lt;p>We could simplify this into a single while, but this version is a little more performant since it always to get multiple messages from a channel without having to &lt;code>await&lt;/code>. More information on &lt;a href="https://devblogs.microsoft.com/dotnet/an-introduction-to-system-threading-channels/">An Introduction to System.Threading.Channels&lt;/a>&lt;/p>
+&lt;h3 id="scoped-services">Scoped services&lt;/h3>
+&lt;p>Note that the &lt;code>BackgroundService&lt;/code> here is a singleton, meaning that it won&amp;rsquo;t be able to access scoped services, such as EntityFramework Core&amp;rsquo;s &lt;code>DbContext&lt;/code>, which is often registered as scope.&lt;/p>
+&lt;p>To get around that, you should inject an &lt;code>IServiceProvider&lt;/code> into your background service. Depending on performance consideration, I&amp;rsquo;d typically start with creating a new scope per incoming message, and looking into batching if there&amp;rsquo;s an issue.&lt;/p>
+&lt;h2 id="wiring-the-dependency-injection">Wiring the dependency injection&lt;/h2>
+&lt;p>We start by wiring the channel itself, as long as its reader and writer.&lt;/p>
+&lt;p>Note that I&amp;rsquo;m using minimal API syntax here, but it should be easy to adapt to the older style syntax like ASP.NET Core 5.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>builder.Services.AddSingleton(Channel.CreateUnbounded&amp;lt;Model&amp;gt;());
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>builder.Services.AddSingleton(p =&amp;gt; p.GetRequiredService&amp;lt;Channel&amp;lt;Model&amp;gt;&amp;gt;().Reader);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>builder.Services.AddSingleton(p =&amp;gt; p.GetRequiredService&amp;lt;Channel&amp;lt;Model&amp;gt;&amp;gt;().Writer);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>CreateUnbounded&lt;/code> means that there won&amp;rsquo;t be any item limits on the channel, other than the amount of memory available to your application.&lt;/p>
+&lt;p>then, we wire the service.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>builder.Services.AddHostedService&amp;lt;ModelService&amp;gt;();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="setting-up-the-route">Setting up the route&lt;/h2>
+&lt;p>We then setup a route to receive the messages. To make things easier, I made one that receives an array.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>app.MapPost(&lt;span style="color:#e6db74">&amp;#34;/messages&amp;#34;&lt;/span>, &lt;span style="color:#66d9ef">async&lt;/span> (ChannelWriter&amp;lt;Model&amp;gt; writer, ICollection&amp;lt;Model&amp;gt; models, CancellationToken cancellationToken) =&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">foreach&lt;/span> (&lt;span style="color:#66d9ef">var&lt;/span> model &lt;span style="color:#66d9ef">in&lt;/span> models)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">await&lt;/span> writer.WriteAsync(model, cancellationToken);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> StatusCodes.Status202Accepted;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>});
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="testing-it">Testing it&lt;/h2>
+&lt;p>You can try it by making a POST to &lt;code>/Messages&lt;/code> with a payload such as&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>[
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#f92672">&amp;#34;Message&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;hello world&amp;#34;&lt;/span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#f92672">&amp;#34;Message&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;hello too&amp;#34;&lt;/span> },
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> { &lt;span style="color:#f92672">&amp;#34;Message&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;hello three&amp;#34;&lt;/span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If you want to make sure that the request returns before the messages are processed, you can add a &lt;code>Task.Delay&lt;/code> in &lt;code>ModelService&lt;/code> after each log message. The messages will slowly scroll in your application&amp;rsquo;s console, long after the request has completed.&lt;/p>
+&lt;h1 id="parting-words">Parting words&lt;/h1>
+&lt;p>This was a very simple demo of channels with ASP.NET Core. You can find a working demo at &lt;a href="https://github.com/EricStG/AspNetCoreChannels">https://github.com/EricStG/AspNetCoreChannels&lt;/a>.&lt;/p>
+&lt;p>If you&amp;rsquo;re considering using channels in your application, consider spending some time configuring your channels. For example, I&amp;rsquo;d look at whether I should use a bounded or unbounded channel, and if I&amp;rsquo;ll be using a single reader or writer. Having it properly configured will improve performance and avoid unplanned nastiness.&lt;/p></description><category>ASP.NET Core</category><category>.NET</category><category>Channels</category></item><item><title>Is the future of work remote?</title><link>https://esg.dev/posts/is-the-future-of-work-remote/</link><pubDate>Mon, 26 Apr 2021 18:49:17 -0400</pubDate><guid>https://esg.dev/posts/is-the-future-of-work-remote/</guid><description>&lt;p>Since the start of this great pandemic of ours, there&amp;rsquo;s been a lot of virtual ink spilled about companies doing a shift to fully remote or hybrid models. As I&amp;rsquo;ve been working mostly remote since 2018, I thought I&amp;rsquo;d chime in on the matter.&lt;/p>
 &lt;p>Spoiler: I often say that articles asking a &amp;ldquo;Yes&amp;rdquo; or &amp;ldquo;No&amp;rdquo; question in the titles can usually be answered by &amp;ldquo;No&amp;rdquo;. This is no exception.&lt;/p>
 &lt;h2 id="remote-work-takes-effort">Remote work takes effort&lt;/h2>
 &lt;p>I&amp;rsquo;ve seen inside a few companies during their shift to remote. Some of them are doing well, but others&amp;hellip; not so much. There seem to be patterns in the later, such as:&lt;/p>
