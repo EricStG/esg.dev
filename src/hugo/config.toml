@@ -4,7 +4,7 @@ title = "ESG's"
 
 DefaultContentLanguage = "en"
 #SectionPagesMenu = "main"
-googleAnalytics = "UA-145113644-1"
+googleAnalytics = "G-FTQQ7H86XR"
 enableRobotsTXT = true
 show_reading_time = false
 
@@ -65,12 +65,6 @@ theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
     pre = "<i class='fa fa-heart'></i>"
     url = "/tags/"
     weight = 20
-
-[privacy]
-  [privacy.googleAnalytics]
-    anonymizeIP = true
-    respectDoNotTrack = true
-    useSessionStorage = true
 
 [related]
   includeNewer = true
