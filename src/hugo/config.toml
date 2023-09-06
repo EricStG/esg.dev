@@ -5,7 +5,7 @@ title = "ESG's"
 DefaultContentLanguage = "en"
 #SectionPagesMenu = "main"
 googleAnalytics = "G-FTQQ7H86XR"
-enableRobotsTXT = true
+enableRobotsTXT = false
 show_reading_time = false
 
 theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
