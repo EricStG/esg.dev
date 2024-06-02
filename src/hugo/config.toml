@@ -23,11 +23,12 @@ theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
 [[params.ananke_socials]]
   name = "mastodon"
   url = "https://hachyderm.io/@esg"
-  rel = "me"
+  rel = "me noopener"
 
 [[params.ananke_socials]]
-  name = "twitter"
-  url = "https://twitter.com/Eric_STG"
+  name = "bluesky"
+  url = "https://bsky.app/profile/esg.dev"
+  label= "Bluesky"
 
 [[params.ananke_socials]]
   name = "github"
