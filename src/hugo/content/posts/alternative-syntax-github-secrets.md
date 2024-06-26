@@ -1,7 +1,7 @@
 ---
 title: "Alternative syntax for accessing GitHub secrets in actions"
-date: 2024-06-26T14:01:55-04:00
-date: 2024-06-26T14:01:55-04:00
+date: 2024-06-26T11:01:55-04:00
+date: 2024-06-26T11:01:55-04:00
 summary: An alternative syntax to access GitHub secrets dynamically within an action
 tags:
 - GitHub
