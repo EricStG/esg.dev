@@ -1,3 +1,4 @@
+src/hugo/resources/
 src/hugo/public/
 *.backup
 *.tfstate

@@ -4,11 +4,24 @@ title = "ESG's"
 
 DefaultContentLanguage = "en"
 #SectionPagesMenu = "main"
-googleAnalytics = "G-FTQQ7H86XR"
 enableRobotsTXT = false
 show_reading_time = false
 
-theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
+[module]
+  [[module.imports]]
+    disable = false
+    ignoreConfig = false
+    ignoreImports = false
+    path = 'github.com/theNewDynamic/gohugo-theme-ananke/v2'
+
+[services]
+  [services.googleAnalytics]
+    id = "G-FTQQ7H86XR"
+
+[privacy]
+  [privacy.googleAnalytics]
+    disable = false
+    respectDoNotTrack = true
 
 [sitemap]
   changefreq = "monthly"
@@ -20,27 +33,31 @@ theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
   background_color_class = "bg-black"
   recent_posts_number = 3
 
-[[params.ananke_socials]]
-  name = "mastodon"
-  url = "https://hachyderm.io/@esg"
-  rel = "me noopener"
+[params.ananke.social.follow]
+  new_window_icon = true
+  networks = [
+    "mastodon",
+    "bluesky",
+    "github",
+    "linkedin",
+    "stackoverflow"
+  ]
 
-[[params.ananke_socials]]
-  name = "bluesky"
-  url = "https://bsky.app/profile/esg.dev"
-  label= "Bluesky"
+[params.ananke.social.bluesky]
+  username = "esg.dev"
 
-[[params.ananke_socials]]
-  name = "github"
-  url = "https://github.com/EricStG"
+[params.ananke.social.github]
+  username = "EricStG"
 
-[[params.ananke_socials]]
-  name = "linkedin"
-  url = "https://www.linkedin.com/in/eric-st-georges/"
+[params.ananke.social.linkedin]
+  username = "eric-st-georges"
 
-[[params.ananke_socials]]
-  name = "stackoverflow"
-  url = "https://stackoverflow.com/users/1251127/esg"
+[params.ananke.social.mastodon]
+  profilelink = "https://hachyderm.io/@esg"
+  rel = "me"
+
+[params.ananke.social.stackoverflow]
+  username = "1251127"
 
 [taxonomies]
   tag = "tags"
