@@ -1,7 +1,6 @@
 ---
 title: "Deferred processing in ASP.NET Core 6"
 date: 2022-07-17T18:01:55-04:00
-date: 2022-07-17T18:01:55-04:00
 summary: How to process tasks in the background after a request has returned in ASP.NET Core 6
 tags:
 - ASP.NET Core

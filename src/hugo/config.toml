@@ -12,7 +12,7 @@ show_reading_time = false
     disable = false
     ignoreConfig = false
     ignoreImports = false
-    path = 'github.com/theNewDynamic/gohugo-theme-ananke/v2'
+    path = 'github.com/gohugo-ananke/ananke/v2'
 
 [services]
   [services.googleAnalytics]
