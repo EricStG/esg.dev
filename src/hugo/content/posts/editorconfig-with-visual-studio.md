@@ -3,8 +3,8 @@ title: Editorconfig integration with Visual Studio and .NET
 date: 2021-02-21T19:01:55-05:00
 summary: Taking advantage of Editorconfig to define your coding styles with Visual Studio
 tags:
+- dotnet
 - visual studio
-- .net
 keywords: editorconfig, visual studio, visual studio code, .net
 ---
 

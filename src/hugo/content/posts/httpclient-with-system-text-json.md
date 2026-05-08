@@ -4,7 +4,7 @@ date: 2021-01-22T17:01:55-05:00
 lastmod: 2021-01-22T17:15:00-05:00
 summary: Using the HttpClient with System.Text.Json with System.Net.Http.Json.
 tags:
-- .net
+- dotnet
 keywords: .NET, .NET Core, HttpClient, Json, System.Text.Json, System.Net.Http.Json, Microsoft.AspNet.WebApi.Client
 ---
 

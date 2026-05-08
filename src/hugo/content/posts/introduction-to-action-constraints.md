@@ -4,8 +4,8 @@ date: 2019-12-02T18:45:08-05:00
 lastmod: 2021-01-22T17:15:00-05:00
 summary: Adding constraints to a route in ASP.NET Core using by implementing IActionConstraint on an attribute
 tags:
-- ASP.NET Core
-- .NET
+- asp.net core
+- dotnet
 keywords: .Net, .NET Core, ASP.NET Core, Action Constraints
 ---
 

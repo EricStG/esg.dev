@@ -3,8 +3,8 @@ title: Is the future of work remote?
 date: 2021-04-26T18:49:17-04:00
 summary: While there's a lot of talk about remote work lately, I think the future will be a little more nuanced than headlines would make you believe
 tags:
-- Remote Work
-- Software Development
+- remote work
+- software development
 keywords: Work, Remote, Virtual, Software Development
 ---
 Since the start of this great pandemic of ours, there's been a lot of virtual ink spilled about companies doing a shift to fully remote or hybrid models. As I've been working mostly remote since 2018, I thought I'd chime in on the matter.

@@ -4,8 +4,8 @@ date: 2020-07-12T18:08:20-04:00
 lastmod: 2021-03-01T13:30:00-05:00
 summary: Some tips on how to effectively use structure logging using Serilog
 tags:
-- Serilog
-- .NET
+- dotnet
+- serilog
 keywords: Serilog, .NET, Structured Logs
 ---
 

@@ -4,7 +4,7 @@ date: 2020-10-24T20:15:26-04:00
 lastmod: 2021-01-22T17:15:00-05:00
 summary: Software development job titles tend to mean a number of various things to different folks. Here are my thoughts on those.
 tags:
-- Career
+- career
 keywords: Career, Job Titles, Software Development
 ---
 

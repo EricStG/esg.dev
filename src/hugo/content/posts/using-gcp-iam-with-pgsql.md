@@ -4,11 +4,11 @@ date: 2023-03-28T19:15:26-04:00
 lastmod: 2023-03-28T19:15:26-04:00
 summary: Password are so 1990s, so why not rely on service accounts to secure your PostgreSQL setup
 tags:
-- Entity Framework Core
-- Google Cloud
-- .NET
-- Npgsql
-- PostgreSQL
+- dotnet
+- entity framework core
+- google cloud
+- npgsql
+- postgresql
 keywords: Google Cloud, gcp, Cloud SQL, .NET, dotnet, PostgreSQL, Npgsql, Entity Framework Core, efcore
 ---
 
