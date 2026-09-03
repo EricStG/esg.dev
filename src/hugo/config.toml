@@ -1,5 +1,5 @@
 baseURL = "https://esg.dev/"
-languageCode = "en-us"
+locale = "en-ca"
 title = "ESG's"
 
 DefaultContentLanguage = "en"
@@ -41,6 +41,15 @@ show_reading_time = false
     "github",
     "linkedin",
     "stackoverflow"
+  ]
+
+[params.ananke.social.share]
+  icons = true
+  sharetext = true
+  networks = [
+    "mastodon",
+    "bluesky",
+    "linkedin"
   ]
 
 [params.ananke.social.bluesky]
